@@ -17,7 +17,7 @@
 <script>
     $(document).ready(function() {
       $('#btnSignup').click(function() {
-    	var passck1 = $('#user_pw').val();
+    	var passck1 = $('#userPw').val();
     	var passck2 = $('#passwdck').val();
     	console.log(passck1);
     	if(passck1 != passck2){
@@ -27,10 +27,10 @@
     	else {
         $.ajax({
                   type: "post",
-                  url: "/users",
+                  url: "/signup/insert",
                   contentType : "application/json;charset=utf8",
                   datatype : "json",
-                  data: JSON.stringify({"user_id": $('#user_id').val(), "user_pw": $('#user_pw').val()}),
+                  data: JSON.stringify({"userId": $('#userId').val(), "userPw": $('#userPw').val()}),
                   success: function(response) {
                 	  if(response.code == '200') {
       					alert("success");
@@ -62,13 +62,13 @@ body {
 		<div class="col-md-2 col-md-offset-5">
 			<h2 class="text-center">Sign Up</h2>
 				<div class="form-group">
-					<label for="user_id">이메일 주소</label> <input type="text"
-						class="form-control" id="user_id" name="user_id"
+					<label for="userId">아이디</label> <input type="text"
+						class="form-control" id="userId" name="userId"
 						placeholder="아이디를 입력하세요" required>
 				</div>
 				<div class="form-group">
-					<label for="user_pw">패스워드</label> <input type="password"
-						class="form-control" id="user_pw" name="user_pw" placeholder="패스워드"
+					<label for="userPw">패스워드</label> <input type="password"
+						class="form-control" id="userPw" name="userPw" placeholder="패스워드"
 						required>
 				</div>
 				<div class="form-group">

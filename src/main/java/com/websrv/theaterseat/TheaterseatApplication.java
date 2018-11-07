@@ -12,7 +12,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 @SpringBootApplication
-@MapperScan(value={"com.websrv.theaterseat.model"})
+@MapperScan(value={"com.websrv.theaterseat.dao"})
 public class TheaterseatApplication {
 
 	public static void main(String[] args) {

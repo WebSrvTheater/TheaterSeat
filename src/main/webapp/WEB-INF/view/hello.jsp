@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-HelloWorld
+<a href="/signup">회원가입</a>
 </body>
 </html>
