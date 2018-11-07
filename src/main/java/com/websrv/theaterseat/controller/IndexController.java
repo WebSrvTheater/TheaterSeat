@@ -12,7 +12,7 @@ public class IndexController {
     @RequestMapping("/")
     public String index(Model model) throws Exception{
 
-        return "hello";
+        return "main";
     }
 
     @RequestMapping("/signup")
