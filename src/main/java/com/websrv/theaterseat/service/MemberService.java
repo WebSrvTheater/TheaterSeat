@@ -21,4 +21,13 @@ public class MemberService {
         else return new ResultView("501", "이미 존재하는 아이디입니다.");}
         catch(Exception e){return new ResultView("500","Internel Server Error");}
     }
+
+    public ResultView chkMember(MemberDao memberDao){
+        try {
+            if (memberMapper.loginCheck(memberDao)) {
+                return new ResultView("200", "success");
+            } else return new ResultView("501", "해당하는 회원정보가 없습니다.");
+        }catch(Exception e){e.printStackTrace();return new ResultView("500","Internal Server Error");
+        }
+    }
 }

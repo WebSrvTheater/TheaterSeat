@@ -20,4 +20,8 @@ public class IndexController {
 
         return "signup";
     }
+    @RequestMapping("/login")
+    public String login(Model mode) throws Exception{
+        return "login";
+    }
 }

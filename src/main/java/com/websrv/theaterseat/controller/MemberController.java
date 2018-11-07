@@ -29,4 +29,14 @@ public class MemberController {
             throw e;
         }
     }
+
+    @ResponseBody
+    @PostMapping(value="/login", produces="application/json")
+    public ResultView chkMember(@RequestBody MemberDao memberDao) {
+        try {
+            return memberService.chkMember(memberDao);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }

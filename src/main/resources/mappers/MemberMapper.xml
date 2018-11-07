@@ -13,6 +13,10 @@
         select count(userId) from member where userId=#{userId}
     </select>
 
+    <select id="loginCheck" resultType="boolean">
+        select count(*) from member where userId=#{userId} and userPw=#{userPw};
+    </select>
+
     <insert id="insertMember" parameterType="com.websrv.theaterseat.dao.MemberDao">
         insert into member(userId,userPw) values(#{userId},#{userPw})
     </insert>
