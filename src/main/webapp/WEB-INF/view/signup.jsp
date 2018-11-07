@@ -27,7 +27,7 @@
     	else {
         $.ajax({
                   type: "post",
-                  url: "/signup/insert",
+                  url: "/member/signup",
                   contentType : "application/json;charset=utf8",
                   datatype : "json",
                   data: JSON.stringify({"userId": $('#userId').val(), "userPw": $('#userPw').val()}),

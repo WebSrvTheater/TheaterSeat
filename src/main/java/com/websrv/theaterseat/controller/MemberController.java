@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/signup")
+@RequestMapping("/member")
 public class MemberController {
 
     @Autowired
     MemberService memberService;
 
     @ResponseBody
-    @PostMapping(value="/insert", produces="application/json")
+    @PostMapping(value="/signup", produces="application/json")
     public ResultView createMember(@RequestBody MemberDao memberDao){
         try{
             return memberService.createMember(memberDao);
