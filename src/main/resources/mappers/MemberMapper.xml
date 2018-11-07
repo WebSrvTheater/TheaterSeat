@@ -5,15 +5,15 @@
 
 <mapper namespace="com.websrv.theaterseat.dao.MemberMapper">
 
-    <select id="selectMemberList" parameterType="com.websrv.theaterseat.dao.MemberDAO" resultType="com.websrv.theaterseat.dao.MemberDAO">
+    <select id="selectMemberList" parameterType="com.websrv.theaterseat.dao.MemberDao" resultType="com.websrv.theaterseat.dao.MemberDao">
         select * from member
     </select>
 
-    <select id="selectOne" resultType="com.websrv.theaterseat.dao.MemberDAO">
-        select * from member where userId=#{userId}
+    <select id="findDuplicatedId" resultType="boolean">
+        select count(userId) from member where userId=#{userId}
     </select>
 
-    <insert id="insertMember" parameterType="com.websrv.theaterseat.dao.MemberDAO">
+    <insert id="insertMember" parameterType="com.websrv.theaterseat.dao.MemberDao">
         insert into member(userId,userPw) values(#{userId},#{userPw})
     </insert>
 

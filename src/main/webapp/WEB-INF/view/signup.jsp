@@ -19,11 +19,11 @@
       $('#btnSignup').click(function() {
     	var passck1 = $('#userPw').val();
     	var passck2 = $('#passwdck').val();
-    	console.log(passck1);
     	if(passck1 != passck2){
     		alert("입력하신 두 비밀번호가 일치하지 않습니다.");
     		return false;
     	}
+
     	else {
         $.ajax({
                   type: "post",
@@ -33,10 +33,11 @@
                   data: JSON.stringify({"userId": $('#userId').val(), "userPw": $('#userPw').val()}),
                   success: function(response) {
                 	  if(response.code == '200') {
-      					alert("success");
+      					alert(response.message);
+      					window.location.href="/";
       				}
       					else {
-      					alert(response.code);
+      					alert(response.message);
       				}
                   },
                   error: function() {
