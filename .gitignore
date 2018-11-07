@@ -1,1 +1,4 @@
 .idea/workspace.xml
+.idea/misc.xml
+.out/production/classes/com/websrv/theaterseat/controller/MemberController.class
+.out/production/classes/com/websrv/theaterseat/service/MemberService.class
