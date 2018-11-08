@@ -1,6 +1,7 @@
 package com.websrv.theaterseat.controller;
 
 import com.websrv.theaterseat.dao.MemberMapper;
+import com.websrv.theaterseat.dao.TheaterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,9 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
+    @Autowired
+    TheaterMapper theaterMapper;
+
     @RequestMapping("/")
     public String index(Model model) throws Exception{
-
+        System.out.println(theaterMapper.selectTheaterAndRoom());
         return "main";
     }
 
