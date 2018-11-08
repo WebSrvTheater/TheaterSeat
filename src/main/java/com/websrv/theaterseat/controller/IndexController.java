@@ -15,7 +15,8 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(Model model) throws Exception{
-        System.out.println(theaterMapper.selectTheaterAndRoom());
+        System.out.println(theaterMapper.selectTheaterName());
+        System.out.println(theaterMapper.selectRoomName(theaterMapper.selectTheaterName().get(0)));
         return "main";
     }
 

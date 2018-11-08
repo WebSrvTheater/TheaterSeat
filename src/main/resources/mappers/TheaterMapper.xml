@@ -5,8 +5,12 @@
 
 <mapper namespace="com.websrv.theaterseat.dao.TheaterMapper">
 
-    <select id="selectTheaterAndRoom" resultType="map">
-        select theaterName, roomName from theater,room where theater.t_idx = room.t_idx
+    <select id="selectTheaterName" resultType="String">
+        select theaterName from theater
+    </select>
+
+    <select id="selectRoomName" parameterType="String" resultType="String">
+        select roomName from theater,room where theater.t_idx = room.t_idx and theater.theaterName=#{theaterName}
     </select>
 
 </mapper>
