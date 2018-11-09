@@ -70,10 +70,10 @@
                         <ul class="nav navbar-nav">
                             <!-- Dropdown level 2 -->
                             <li class="panel panel-default" id="dropdown">
-                                <a data-toggle="collapse" href="#dropdown-lvl<% out.println(i+2); %>">
+                                <a data-toggle="collapse" href="#dropdown-lvl<%out.print(i+2);%>">
                                     <span class="glyphicon glyphicon-off"></span> <% out.println(theater.get(i)); %> <span class="caret"></span>
                                 </a>
-                                <div id="dropdown-lvl<% out.println(i+2); %>" class="panel-collapse collapse">
+                                <div id="dropdown-lvl<% out.print(i+2); %>" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
                                             <li><a href="#">Link</a></li>
