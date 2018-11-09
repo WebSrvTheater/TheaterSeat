@@ -24,7 +24,7 @@
 <body>
 <div class="row">
     <!-- uncomment code for absolute positioning tweek see top comment in css -->
-    <!-- <div class="absolute-wrapper"> </div> -->
+    <!-- <div class="absolute-wrapper"> -->
     <!-- Menu -->
     <div class="side-menu">
 
@@ -50,8 +50,8 @@
     </div>
 
     <!-- Main Menu -->
-    <div class="side-menu-container">
-        <ul class="nav navbar-nav">
+    <div class="side-menu-container" >
+        <ul class="nav navbar-nav" style="overflow: auto; height: 100%;">
 
             <li><a href="#"><span class="glyphicon glyphicon-send"></span> Link</a></li>
             <li class="active"><a href="#"><span class="glyphicon glyphicon-plane"></span> Active Link</a></li>
@@ -79,7 +79,7 @@
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
                                             <% for(int j=0;j<theaterMap.get(theaterName.get(i)).size();j++) { %>
-                                            <li><a href="#"><% out.print(theaterMap.get(theaterName.get(i)).get(j)); %></a></li>
+                                            <li class="hr"><a href="/signup" target="content"><% out.print(theaterMap.get(theaterName.get(i)).get(j)); %></a></li>
                                             <% } %>
                                         </ul>
                                     </div>
@@ -100,13 +100,12 @@
     </div>
 
     <!-- Main Content -->
-    <div class="container-fluid">
+    <div class="container-fluid" id="main-content">
         <div class="side-body">
-           <h1> Main Content here </h1>
-
-
+           <iframe name="content" src="/login" height="100%" width="100%" border="0" frameborder="0" scrolling="no"></iframe>
         </div>
     </div>
+     </div>
 </div>
 
 

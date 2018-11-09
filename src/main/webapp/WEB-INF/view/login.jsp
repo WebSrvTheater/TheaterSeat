@@ -40,17 +40,12 @@
 
     });
   </script>
-<style>
-body {
-	padding-top: 100px;
-}
-</style>
 
 <head>
 <title>SignUp</title>
 </head>
 <body>
-	<div class="row">
+	<div class="row" id="main" style="padding-top: 100px;">
 		<div class="col-md-2 col-md-offset-5">
 			<h2 class="text-center">Login</h2>
 				<div class="form-group">
