@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ page session="false"%>
-<%@ page import ="java.util.List"%>
+<%@ page import ="java.util.*"%>
 <!-- @author : heedong111 -->
 <html>
 <head>
@@ -65,20 +65,22 @@
 
                 <!-- Dropdown level 1 -->
                 <div id="dropdown-lvl1" class="panel-collapse collapse">
-                <% List<String> theater = (List<String>) request.getAttribute("theater"); for(int i=0;i<theater.size();i++){ %>
+                <% List<String> theaterName = (List<String>) request.getAttribute("theaterName"); %>
+                <% Map<String, List<String>> theaterMap = (Map<String, List<String>>) request.getAttribute("theaterMap"); %>
+                <% for(int i=0;i<theaterMap.size();i++){ %>
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
                             <!-- Dropdown level 2 -->
                             <li class="panel panel-default" id="dropdown">
                                 <a data-toggle="collapse" href="#dropdown-lvl<%out.print(i+2);%>">
-                                    <span class="glyphicon glyphicon-off"></span> <% out.println(theater.get(i)); %> <span class="caret"></span>
+                                    <span class="glyphicon glyphicon-off"></span> <% out.print(theaterName.get(i)); %> <span class="caret"></span>
                                 </a>
                                 <div id="dropdown-lvl<% out.print(i+2); %>" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="#">Link</a></li>
-                                            <li><a href="#">Link</a></li>
-                                            <li><a href="#">Link</a></li>
+                                            <% for(int j=0;j<theaterMap.get(theaterName.get(i)).size();j++) { %>
+                                            <li><a href="#"><% out.print(theaterMap.get(theaterName.get(i)).get(j)); %></a></li>
+                                            <% } %>
                                         </ul>
                                     </div>
                                 </div>
