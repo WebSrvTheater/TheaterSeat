@@ -65,22 +65,24 @@
 
                 <!-- Dropdown level 1 -->
                 <div id="dropdown-lvl1" class="panel-collapse collapse">
-                <% List<String> theaterName = (List<String>) request.getAttribute("theaterName"); %>
+                <% List<String> theaterNameList = (List<String>) request.getAttribute("theaterNameList"); %>
                 <% Map<String, List<String>> theaterMap = (Map<String, List<String>>) request.getAttribute("theaterMap"); %>
                 <% Map<String, String> roomMap = (Map<String,String>) request.getAttribute("roomMap"); %>
                 <% for(int i=0;i<theaterMap.size();i++){ %>
+                <% String theaterName = theaterNameList.get(i); %>
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
                             <!-- Dropdown level 2 -->
                             <li class="panel panel-default" id="dropdown">
                                 <a data-toggle="collapse" href="#dropdown-lvl<%out.print(i+2);%>">
-                                    <span class="glyphicon glyphicon-off"></span> <% out.print(theaterName.get(i)); %> <span class="caret"></span>
+                                    <span class="glyphicon glyphicon-off"></span> <% out.print(theaterName); %> <span class="caret"></span>
                                 </a>
                                 <div id="dropdown-lvl<% out.print(i+2); %>" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <% for(int j=0;j<theaterMap.get(theaterName.get(i)).size();j++) { String roomNum = theaterMap.get(theaterName.get(i)).get(j);%>
-                                            <li class="hr"><a href="/room/<%=roomNum%>" target="content"><% out.print(roomMap.get(roomNum)); %></a></li>
+                                            <% for(int j=0;j<theaterMap.get(theaterName).size();j++) { %>
+                                            <% String r_idx = theaterMap.get(theaterName).get(j); %>
+                                            <li class="roomlist"><a href="/room/<%=r_idx%>" target="content"><% out.print(roomMap.get(r_idx)); %></a></li>
                                             <% } %>
                                         </ul>
                                     </div>

@@ -1,12 +1,10 @@
 package com.websrv.theaterseat.controller;
 
-import com.websrv.theaterseat.dao.MemberMapper;
 import com.websrv.theaterseat.dao.TheaterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,19 +18,24 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(Model model) throws Exception{
+        // t_idx에 해당하는 r_idx 리스트 매핑
         Map <String, List<String>> theaterMap = new HashMap<String, List<String>>();
+        // r_idx에 해당하는 roomName 매핑
         Map <String, String> roomMap = new HashMap<String, String>();
-        List<String> theaterName = theaterMapper.selectTheaterName();
-        List<String> roomName = theaterMapper.selectRoomNumMap();
-        for(int i=0;i<roomName.size();i++){
-            roomMap.put(String.valueOf(i+1) , roomName.get(i));
+
+        List<String> theaterNameList = theaterMapper.selectTheaterName();
+        List<String> roomNameList = theaterMapper.selectAllRoomName();
+
+        for(int i=0;i<theaterNameList.size();i++){
+            theaterMap.put(theaterNameList.get(i),theaterMapper.selectRoomIdx(String.valueOf(i+1)));
         }
-        for(int i=0;i<theaterName.size();i++){
-            theaterMap.put(theaterName.get(i),theaterMapper.selectRoomName(theaterName.get(i)));
+
+        for(int i=0;i<roomNameList.size();i++){
+            roomMap.put(String.valueOf(i+1) , roomNameList.get(i));
         }
-        System.out.println(roomMap);
+
+        model.addAttribute("theaterNameList",theaterNameList);
         model.addAttribute("theaterMap", theaterMap);
-        model.addAttribute("theaterName",theaterName);
         model.addAttribute("roomMap",roomMap);
         return "main";
     }

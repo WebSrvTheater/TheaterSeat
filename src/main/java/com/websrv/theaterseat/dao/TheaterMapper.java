@@ -5,6 +5,6 @@ import java.util.Map;
 
 public interface TheaterMapper {
     public List<String> selectTheaterName() throws Exception;
-    public List<String> selectRoomNumMap() throws Exception;
-    public List<String> selectRoomName(String theaterName) throws Exception;
+    public List<String> selectAllRoomName() throws Exception;
+    public List<String> selectRoomIdx(String t_idx) throws Exception;
 }
