@@ -1,6 +1,6 @@
-package com.websrv.theaterseat.dao;
+package com.websrv.theaterseat.dto;
 
-public class MemberDao {
+public class MemberDto {
 
     private String userId;
     private String userPw;

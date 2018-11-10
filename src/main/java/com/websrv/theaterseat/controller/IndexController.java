@@ -1,6 +1,6 @@
 package com.websrv.theaterseat.controller;
 
-import com.websrv.theaterseat.dao.TheaterMapper;
+import com.websrv.theaterseat.mapper.TheaterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

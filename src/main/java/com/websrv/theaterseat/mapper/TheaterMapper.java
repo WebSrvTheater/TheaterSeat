@@ -1,4 +1,4 @@
-package com.websrv.theaterseat.dao;
+package com.websrv.theaterseat.mapper;
 
 import java.util.List;
 import java.util.Map;

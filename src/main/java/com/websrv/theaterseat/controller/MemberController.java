@@ -1,11 +1,8 @@
 package com.websrv.theaterseat.controller;
 
-import com.websrv.theaterseat.dao.MemberDao;
-import com.websrv.theaterseat.dao.MemberMapper;
+import com.websrv.theaterseat.dto.MemberDto;
 import com.websrv.theaterseat.service.MemberService;
 import com.websrv.theaterseat.view.ResultView;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,9 +19,9 @@ public class MemberController {
 
     @ResponseBody
     @PostMapping(value="/signup", produces="application/json")
-    public ResultView createMember(@RequestBody MemberDao memberDao){
+    public ResultView createMember(@RequestBody MemberDto memberDto){
         try{
-            return memberService.createMember(memberDao);
+            return memberService.createMember(memberDto);
         }catch(Exception e){
             throw e;
         }
@@ -32,9 +29,9 @@ public class MemberController {
 
     @ResponseBody
     @PostMapping(value="/login", produces="application/json")
-    public ResultView chkMember(@RequestBody MemberDao memberDao) {
+    public ResultView chkMember(@RequestBody MemberDto memberDto) {
         try {
-            return memberService.chkMember(memberDao);
+            return memberService.chkMember(memberDto);
         } catch (Exception e) {
             throw e;
         }
