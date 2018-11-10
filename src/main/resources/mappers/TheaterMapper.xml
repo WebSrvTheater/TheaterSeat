@@ -9,8 +9,12 @@
         select theaterName from theater
     </select>
 
+    <select id="selectRoomNumMap" resultType="String">
+        select roomName from room
+    </select>
+
     <select id="selectRoomName" parameterType="String" resultType="String">
-        select roomName from theater,room where theater.t_idx = room.t_idx and theater.theaterName=#{theaterName}
+        select r_idx from theater,room where theater.t_idx = room.t_idx and theater.theaterName=#{theaterName}
     </select>
 
 </mapper>

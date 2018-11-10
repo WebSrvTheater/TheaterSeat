@@ -67,6 +67,7 @@
                 <div id="dropdown-lvl1" class="panel-collapse collapse">
                 <% List<String> theaterName = (List<String>) request.getAttribute("theaterName"); %>
                 <% Map<String, List<String>> theaterMap = (Map<String, List<String>>) request.getAttribute("theaterMap"); %>
+                <% Map<String, String> roomMap = (Map<String,String>) request.getAttribute("roomMap"); %>
                 <% for(int i=0;i<theaterMap.size();i++){ %>
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
@@ -78,8 +79,8 @@
                                 <div id="dropdown-lvl<% out.print(i+2); %>" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <% for(int j=0;j<theaterMap.get(theaterName.get(i)).size();j++) { %>
-                                            <li class="hr"><a href="/signup" target="content"><% out.print(theaterMap.get(theaterName.get(i)).get(j)); %></a></li>
+                                            <% for(int j=0;j<theaterMap.get(theaterName.get(i)).size();j++) { String roomNum = theaterMap.get(theaterName.get(i)).get(j);%>
+                                            <li class="hr"><a href="/room/<%=roomNum%>" target="content"><% out.print(roomMap.get(roomNum)); %></a></li>
                                             <% } %>
                                         </ul>
                                     </div>
