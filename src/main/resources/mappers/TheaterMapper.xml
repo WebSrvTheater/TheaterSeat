@@ -20,4 +20,13 @@
     <select id="selectSeatIdx" parameterType="String" resultType="String">
         select seat.s_idx from room, seat where room.r_idx = seat.r_idx and seat.r_idx=#{r_idx}
     </select>
+
+    <select id="selectSeatRows" parameterType="String" resultType="String">
+        select distinct seatRow from seat where r_idx=#{r_idx}
+    </select>
+
+    <select id="selectSeatNums" parameterType="map" resultType="String">
+        select seatNum from seat where seatRow=#{seatRow} and r_idx=#{r_idx}
+    </select>
+
 </mapper>

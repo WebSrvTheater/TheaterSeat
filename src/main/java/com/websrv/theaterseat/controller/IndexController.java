@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.*;
 
 import static java.lang.System.out;
@@ -52,15 +55,19 @@ public class IndexController {
         return "login";
     }
 
-    @ResponseBody
     @RequestMapping("/room/{r_idx}")
-    public String roomNum(Model model, @PathVariable String r_idx) throws Exception{
-        List<String> seatList = theaterMapper.selectSeatIdx(r_idx);
-        out.print(seatList);
-        for(int i=0; i< seatList.size(); i++){
-            out.print(seatList.get(i));
-            System.out.println("    ");
+    public void roomNum(HttpServletRequest req, HttpServletResponse res, @PathVariable String r_idx) throws Exception{
+        PrintWriter out = res.getWriter();
+
+        Map<String, List<String>> seatMap = new HashMap<String, List<String>>();
+        List<String> seatRows = theaterMapper.selectSeatRows(r_idx);
+
+        for(int i=0;i<seatRows.size();i++){
+            String seatRow = seatRows.get(i);
+            seatMap.put(seatRow, theaterMapper.selectSeatNums(seatRow,r_idx));
         }
-        return "";
+        for(int i=0; i<seatRows.size(); i++){
+            out.println(seatMap.get(seatRows.get(i)));
+        }
     }
 }
