@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
 
+import static java.lang.System.out;
+
 @Controller
 public class IndexController {
 
@@ -51,8 +53,14 @@ public class IndexController {
     }
 
     @ResponseBody
-    @RequestMapping("/room/{roomNum}")
-    public String roomNum(Model model, @PathVariable int roomNum) throws Exception{
-        return "hello"+roomNum;
+    @RequestMapping("/room/{r_idx}")
+    public String roomNum(Model model, @PathVariable String r_idx) throws Exception{
+        List<String> seatList = theaterMapper.selectSeatIdx(r_idx);
+        out.print(seatList);
+        for(int i=0; i< seatList.size(); i++){
+            out.print(seatList.get(i));
+            System.out.println("    ");
+        }
+        return "";
     }
 }
