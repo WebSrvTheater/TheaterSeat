@@ -1,5 +1,7 @@
 package com.websrv.theaterseat.controller;
 
+import com.websrv.theaterseat.dto.SeatDto;
+import com.websrv.theaterseat.mapper.SeatMapper;
 import com.websrv.theaterseat.mapper.TheaterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class IndexController {
 
     @Autowired
     TheaterMapper theaterMapper;
+
+    @Autowired
+    SeatMapper seatMapper;
 
     @RequestMapping("/")
     public String index(Model model) throws Exception{
@@ -59,15 +64,23 @@ public class IndexController {
     public void roomNum(HttpServletRequest req, HttpServletResponse res, @PathVariable String r_idx) throws Exception{
         PrintWriter out = res.getWriter();
 
-        Map<String, List<String>> seatMap = new HashMap<String, List<String>>();
-        List<String> seatRows = theaterMapper.selectSeatRows(r_idx);
+        List<SeatDto> seatDto = seatMapper.selectAllSeats(r_idx);
 
-        for(int i=0;i<seatRows.size();i++){
-            String seatRow = seatRows.get(i);
-            seatMap.put(seatRow, theaterMapper.selectSeatNums(seatRow,r_idx));
+        int maxNum = seatMapper.selectMaxNum(r_idx);
+        char maxRow = seatMapper.selectMaxRow(r_idx);
+
+        int temp=0;
+        out.println("<table>");
+        for(char i='A';i<=maxRow;i++){
+            out.println("<tr>");
+            for(int j=0;j<=maxNum;j++){
+                out.print("<td>");
+                if(seatMapper.isSeatExist(i,j,r_idx)){
+                    out.print(seatDto.get(temp++).getS_idx());
+                }
+            }
+            out.println("</tr>");
         }
-        for(int i=0; i<seatRows.size(); i++){
-            out.println(seatMap.get(seatRows.get(i)));
-        }
+        out.println("</table>");
     }
 }

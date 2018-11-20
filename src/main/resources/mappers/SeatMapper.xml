@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.websrv.theaterseat.mapper.SeatMapper">
+
+    <select id="selectAllSeats" parameterType="String" resultType="com.websrv.theaterseat.dto.SeatDto">
+        select s_idx, seatRow, seatNum from seat where r_idx=#{r_idx}
+    </select>
+
+    <select id="selectMaxRow" parameterType="String" resultType="java.lang.Character">
+        select max(seatRow) from seat where r_idx=#{r_idx}
+    </select>
+
+    <select id="selectMaxNum" parameterType="String" resultType="int">
+        select max(seatNum) from seat where r_idx=#{r_idx}
+    </select>
+
+    <select id="isSeatExist" parameterType="map" resultType="boolean">
+        select count(*) from seat where seatRow=#{seatRow} and seatNum=#{seatNum} and r_idx=#{r_idx}
+    </select>
+
+</mapper>
