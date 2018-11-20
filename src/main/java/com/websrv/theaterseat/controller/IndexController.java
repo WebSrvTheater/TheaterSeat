@@ -78,6 +78,9 @@ public class IndexController {
                 if(seatMapper.isSeatExist(i,j,r_idx)){
                     out.print(seatDto.get(temp++).getS_idx());
                 }
+                if(seatMapper.isHallWay(r_idx,j)){
+                    out.print("<td><pre> </pre>");
+                }
             }
             out.println("</tr>");
         }
