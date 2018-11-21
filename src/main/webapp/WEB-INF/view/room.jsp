@@ -29,24 +29,29 @@
     String roomName = (String) request.getAttribute("roomName");
     int index=0;
 %>
-<div class="row" align="center">
-    <h1><%=theaterName%> <%=roomName%></h1>
+<div class="row" align="center" style="padding-top:30px">
+    <h1 style="font-family:'맑은고딕';"><%=theaterName%> <%=roomName%></h1>
 </div>
-<div class="row" align="center">
+<div class="row" align="center" style="padding-top:50px">
 <table>
+   <caption style="background-color: white; border:1px solid #000000;"><center><b> S C R E E N </b></center></caption>
+   <tr height="100px">
+   <td>
    <% for(char i='A';i<=maxRow;i++){ %>
         <tr>
-        <% for(int j=0;j<=maxNum;j++){ %>
+        <td width="25px" height="25px" align="center"><b><%= i %></b>
+        <% for(int j=1;j<=maxNum;j++){ %>
             <td width="25px" height="25px">
             <% if(seatMapper.isSeatExist(i,j,r_idx)){ %>
-                <button type="button" style="width:100%; border:1px solid #25F263; background-color:white;" class="btn btn-xs">
-                <%= seatDto.get(index++).getSeatNum() %>
+                <button type="button" style="width:100%; border:1px solid #000000; background-color:#AAAAAA" class="btn btn-xs">
+                <font size="1.5" color="white"><%= seatDto.get(index++).getSeatNum() %></font>
                 </button>
             <% } %>
             <% if(seatMapper.isHallWay(r_idx,j)){ %>
                 <td width="25px" height="25px">
             <% } %>
         <% } %>
+        <td width="25px" height="25px" align="center"><b><%= i %></b>
         </tr>
     <% } %>
 </table>
