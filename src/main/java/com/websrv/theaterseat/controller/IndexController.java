@@ -75,4 +75,9 @@ public class IndexController {
 
         return "room";
     }
+
+    @RequestMapping("/seat")
+    public String seat(Model model) throws Exception{
+        return "seat";
+    }
 }

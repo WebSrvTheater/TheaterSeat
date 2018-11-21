@@ -29,6 +29,13 @@
     String roomName = (String) request.getAttribute("roomName");
     int index=0;
 %>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
 <div class="row" align="center" style="padding-top:30px">
     <h1 style="font-family:'맑은고딕';"><%=theaterName%> <%=roomName%></h1>
 </div>
@@ -43,9 +50,9 @@
         <% for(int j=1;j<=maxNum;j++){ %>
             <td width="25px" height="25px">
             <% if(seatMapper.isSeatExist(i,j,r_idx)){ %>
-                <button type="button" style="width:100%; border:1px solid #000000; background-color:#AAAAAA" class="btn btn-xs">
+                <a href="/seat" type="button" style="width:100%; border:1px solid #000000; background-color:#AAAAAA" class="btn btn-xs" data-toggle="modal" data-target="#myModal">
                 <font size="1.5" color="white"><%= seatDto.get(index++).getSeatNum() %></font>
-                </button>
+                </a>
             <% } %>
             <% if(seatMapper.isHallWay(r_idx,j)){ %>
                 <td width="25px" height="25px">
