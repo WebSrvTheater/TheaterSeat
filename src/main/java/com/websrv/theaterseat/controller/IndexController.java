@@ -8,14 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 import java.util.*;
-
-import static java.lang.System.out;
 
 @Controller
 public class IndexController {
@@ -33,7 +29,7 @@ public class IndexController {
         // r_idx에 해당하는 roomName 매핑
         Map <String, String> roomMap = new HashMap<String, String>();
 
-        List<String> theaterNameList = theaterMapper.selectTheaterName();
+        List<String> theaterNameList = theaterMapper.selectAllTheaterName();
         List<String> roomNameList = theaterMapper.selectAllRoomName();
 
         for(int i=0;i<theaterNameList.size();i++){
@@ -61,29 +57,22 @@ public class IndexController {
     }
 
     @RequestMapping("/room/{r_idx}")
-    public void roomNum(HttpServletRequest req, HttpServletResponse res, @PathVariable String r_idx) throws Exception{
-        PrintWriter out = res.getWriter();
+    public String roomNum(Model model, @PathVariable String r_idx) throws Exception{
+        //PrintWriter out = res.getWriter();
 
         List<SeatDto> seatDto = seatMapper.selectAllSeats(r_idx);
 
         int maxNum = seatMapper.selectMaxNum(r_idx);
         char maxRow = seatMapper.selectMaxRow(r_idx);
 
-        int temp=0;
-        out.println("<table>");
-        for(char i='A';i<=maxRow;i++){
-            out.println("<tr>");
-            for(int j=0;j<=maxNum;j++){
-                out.print("<td>");
-                if(seatMapper.isSeatExist(i,j,r_idx)){
-                    out.print(seatDto.get(temp++).getS_idx());
-                }
-                if(seatMapper.isHallWay(r_idx,j)){
-                    out.print("<td><pre> </pre>");
-                }
-            }
-            out.println("</tr>");
-        }
-        out.println("</table>");
+        model.addAttribute("seatDto", seatDto);
+        model.addAttribute("maxNum",maxNum);
+        model.addAttribute("maxRow",maxRow);
+        model.addAttribute("r_idx",r_idx);
+        model.addAttribute("seatMapper",seatMapper);
+        model.addAttribute("theaterName",seatMapper.selectTheaterName(r_idx));
+        model.addAttribute("roomName",seatMapper.selectRoomName(r_idx));
+
+        return "room";
     }
 }

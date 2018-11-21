@@ -24,4 +24,13 @@
     <select id="isHallWay" parameterType="map" resultType="boolean">
         SELECT count(*) FROM room where find_in_set(#{seatNum}, hallway) and r_idx = #{r_idx}
     </select>
+
+    <select id="selectTheaterName" parameterType="String" resultType="String">
+        select distinct theaterName from theater,room where theater.t_idx=(select t_idx from room where r_idx=#{r_idx})
+    </select>
+
+    <select id="selectRoomName" parameterType="String" resultType="String">
+        select distinct roomName from room where r_idx=#{r_idx}
+    </select>
+
 </mapper>
