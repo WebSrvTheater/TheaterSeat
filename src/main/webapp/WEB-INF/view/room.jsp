@@ -18,7 +18,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
-<body style="overflow:auto">
+<body style="width:100%; height:100%; margin-right:300px">
 <%
     SeatMapper seatMapper = (SeatMapper) request.getAttribute("seatMapper");
     List<SeatDto> seatDto = (List<SeatDto>) request.getAttribute("seatDto");

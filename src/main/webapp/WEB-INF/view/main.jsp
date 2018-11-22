@@ -73,14 +73,14 @@
                             <!-- Dropdown level 2 -->
                             <li class="panel panel-default" id="dropdown">
                                 <a data-toggle="collapse" href="#dropdown-lvl<%out.print(i+2);%>">
-                                    <span class="glyphicon glyphicon-off"></span> <% out.print(theaterName); %> <span class="caret"></span>
+                                    <span class="glyphicon glyphicon-th-list"></span> <% out.print(theaterName); %> <span class="caret"></span>
                                 </a>
                                 <div id="dropdown-lvl<% out.print(i+2); %>" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
                                             <% for(int j=0;j<theaterMap.get(theaterName).size();j++) { %>
                                             <% String r_idx = theaterMap.get(theaterName).get(j); %>
-                                            <li class="roomlist"><a href="/room/<%=r_idx%>" target="content"><% out.print(roomMap.get(r_idx)); %></a></li>
+                                            <li class="roomlist"><a href="/room/<%=r_idx%>" class="seat" id="<%=r_idx%>" href="/room/<%=r_idx%>" target="content"><% out.print(roomMap.get(r_idx)); %></a></li>
                                             <% } %>
                                         </ul>
                                     </div>
