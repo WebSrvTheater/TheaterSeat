@@ -4,8 +4,10 @@ import com.websrv.theaterseat.dto.SeatDto;
 import com.websrv.theaterseat.mapper.SeatMapper;
 import com.websrv.theaterseat.mapper.TheaterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -56,8 +58,8 @@ public class IndexController {
         return "login";
     }
 
-    @RequestMapping("/room/{r_idx}")
-    public String roomNum(Model model, @PathVariable String r_idx) throws Exception{
+    @GetMapping("/room/{r_idx}")
+    public String roomNum(Model model, @PathVariable String r_idx) throws Exception {
         //PrintWriter out = res.getWriter();
 
         List<SeatDto> seatDto = seatMapper.selectAllSeats(r_idx);
@@ -66,21 +68,19 @@ public class IndexController {
         char maxRow = seatMapper.selectMaxRow(r_idx);
 
         model.addAttribute("seatDto", seatDto);
-        model.addAttribute("maxNum",maxNum);
-        model.addAttribute("maxRow",maxRow);
-        model.addAttribute("r_idx",r_idx);
-        model.addAttribute("seatMapper",seatMapper);
-        model.addAttribute("theaterName",seatMapper.selectTheaterName(r_idx));
-        model.addAttribute("roomName",seatMapper.selectRoomName(r_idx));
+        model.addAttribute("maxNum", maxNum);
+        model.addAttribute("maxRow", maxRow);
+        model.addAttribute("r_idx", r_idx);
+        model.addAttribute("seatMapper", seatMapper);
+        model.addAttribute("theaterName", seatMapper.selectTheaterName(r_idx));
+        model.addAttribute("roomName", seatMapper.selectRoomName(r_idx));
 
 
         return "room";
     }
-
-    @RequestMapping("/seat/{s_idx}")
+    @GetMapping("/seat/{s_idx}")
     public String seat(Model model, @PathVariable String s_idx) throws Exception{
         model.addAttribute("s_idx",s_idx);
-
         return "seat";
     }
 }

@@ -30,12 +30,14 @@
     int index=0;
 %>
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<% for(int i=0;i<seatDto.size();i++){ %>
+<div class="modal fade" id="myModal<%=i%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
     </div>
   </div>
 </div>
+<% } %>
 <div class="row" align="center" style="padding-top:40px">
     <h1 style="font-family:'맑은고딕';"><%=theaterName%> <%=roomName%></h1>
 </div>
@@ -59,7 +61,7 @@
                     case 4 : color = "black"; break;
                  }
              %>
-                <a href="/seat/<%=seatDto.get(index).getS_idx()%>" type="button" style="display:block; line-height:22px; width:100%; vertical-align:middle; text-align:center; border-radius: 0px; border:3px solid <% out.print(color); %>; background-color:#888888" class="btn btn-xs" data-toggle="modal" data-target="#myModal">
+                <a href="/seat/<%=seatDto.get(index).getS_idx()%>" type="button" style="display:block; line-height:22px; width:100%; vertical-align:middle; text-align:center; border-radius: 0px; border:3px solid <% out.print(color); %>; background-color:#888888" class="btn btn-xs" data-toggle="modal" data-target="#myModal<%=index%>">
                 <span style="font-size:12px; color: white;"><%= seatDto.get(index++).getSeatNum() %></span>
                 </a>
             <% } %>
