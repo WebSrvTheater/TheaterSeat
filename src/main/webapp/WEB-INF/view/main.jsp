@@ -50,8 +50,8 @@
     </div>
 
     <!-- Main Menu -->
-    <div class="side-menu-container" >
-        <ul class="nav navbar-nav" style="overflow: auto; height: 100%; width: 100%;">
+    <div class="side-menu-container">
+        <ul class="nav navbar-nav" style="height: 90%; width: 100%; overflow:auto;">
 
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> 로그인 </a></li>
 
