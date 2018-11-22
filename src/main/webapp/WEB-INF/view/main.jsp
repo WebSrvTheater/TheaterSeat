@@ -99,9 +99,11 @@
     </div>
 
     <!-- Main Content -->
-    <div class="container-fluid" id="main-content>
+    <div class="container-fluid" id="main-content">
         <div class="side-body">
-           <iframe name="content" src="/login" height="100%" width="100%" border="0" frameborder="0" scrolling="auto"></iframe>
+            <div id="main-page">
+                <iframe name="content" src="/login" height="100%" width="100%" border="0" frameborder="0" scrolling="auto"></iframe>
+            </div>
         </div>
     </div>
      </div>
