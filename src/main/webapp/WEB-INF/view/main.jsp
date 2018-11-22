@@ -42,8 +42,8 @@
 
             <!-- Brand -->
             <div class="brand-name-wrapper">
-                <a class="navbar-brand" href="#">
-                    Brand
+                <a class="navbar-brand" href="/">
+                    이 자리, 어떤가요?
                 </a>
             </div>
         </div>
@@ -51,16 +51,14 @@
 
     <!-- Main Menu -->
     <div class="side-menu-container" >
-        <ul class="nav navbar-nav" style="overflow: auto; height: 100%;">
+        <ul class="nav navbar-nav" style="overflow: auto; height: 100%; width: 100%;">
 
-            <li><a href="#"><span class="glyphicon glyphicon-send"></span> Link</a></li>
-            <li class="active"><a href="#"><span class="glyphicon glyphicon-plane"></span> Active Link</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-cloud"></span> Link</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> 로그인 </a></li>
 
             <!-- Dropdown-->
             <li class="panel panel-default" id="dropdown">
                 <a data-toggle="collapse" href="#dropdown-lvl1">
-                    <span class="glyphicon glyphicon-user"></span> Sub Level <span class="caret"></span>
+                    <span class="glyphicon glyphicon-search"></span> 영화관 찾기 <span class="caret"></span>
                 </a>
 
                 <!-- Dropdown level 1 -->
@@ -93,8 +91,6 @@
                 <% } %>
                 </div>
             </li>
-
-            <li><a href="#"><span class="glyphicon glyphicon-signal"></span> Link</a></li>
 
         </ul>
     </div><!-- /.navbar-collapse -->
