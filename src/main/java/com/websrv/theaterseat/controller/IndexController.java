@@ -77,8 +77,10 @@ public class IndexController {
         return "room";
     }
 
-    @RequestMapping("/seat")
-    public String seat(Model model) throws Exception{
+    @RequestMapping("/seat/{s_idx}")
+    public String seat(Model model, @PathVariable String s_idx) throws Exception{
+        model.addAttribute("s_idx",s_idx);
+
         return "seat";
     }
 }

@@ -59,7 +59,7 @@
                     case 4 : color = "black"; break;
                  }
              %>
-                <a href="/seat" type="button" style="display:block; line-height:22px; width:100%; vertical-align:middle; text-align:center; border-radius: 0px; border:3px solid <% out.print(color); %>; background-color:#888888" class="btn btn-xs" data-toggle="modal" data-target="#myModal">
+                <a href="/seat/<%=seatDto.get(index).getS_idx()%>" type="button" style="display:block; line-height:22px; width:100%; vertical-align:middle; text-align:center; border-radius: 0px; border:3px solid <% out.print(color); %>; background-color:#888888" class="btn btn-xs" data-toggle="modal" data-target="#myModal">
                 <span style="font-size:12px; color: white;"><%= seatDto.get(index++).getSeatNum() %></span>
                 </a>
             <% } %>
