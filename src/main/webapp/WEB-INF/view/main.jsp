@@ -58,7 +58,7 @@
             <!-- Dropdown-->
             <li class="panel panel-default" id="dropdown">
                 <a data-toggle="collapse" href="#dropdown-lvl1">
-                    <span class="glyphicon glyphicon-search"></span> Sub Level <span class="caret"></span>
+                    <span class="glyphicon glyphicon-search"></span> 영화관 찾기 <span class="caret"></span>
                 </a>
 
                 <!-- Dropdown level 1 -->
