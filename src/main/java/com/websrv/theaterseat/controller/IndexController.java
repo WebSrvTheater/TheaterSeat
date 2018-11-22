@@ -73,6 +73,7 @@ public class IndexController {
         model.addAttribute("theaterName",seatMapper.selectTheaterName(r_idx));
         model.addAttribute("roomName",seatMapper.selectRoomName(r_idx));
 
+
         return "room";
     }
 

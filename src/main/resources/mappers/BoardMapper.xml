@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.websrv.theaterseat.mapper.BoardMapper">
+    <insert id="insertBorad" parameterType="com.websrv.theaterseat.dto.BoardDto">
+        insert into board(contents,m_idx) values(#{contents},#{m_idx})
+    </insert>
+</mapper>
