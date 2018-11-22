@@ -27,25 +27,29 @@ caption {
 <title>Insert title here</title>
 </head>
 <body style="width:100%; height:100%; margin-right:300px">
+<%-- Attribute 변수 선언부 --%>
 <%
-    SeatMapper seatMapper = (SeatMapper) request.getAttribute("seatMapper");
-    List<SeatDto> seatDto = (List<SeatDto>) request.getAttribute("seatDto");
-    char maxRow = (char) request.getAttribute("maxRow");
-    int maxNum = (int) request.getAttribute("maxNum");
-    String r_idx = (String) request.getAttribute("r_idx");
-    String theaterName = (String) request.getAttribute("theaterName");
-    String roomName = (String) request.getAttribute("roomName");
-    int index=0;
-    String url="/resources/img/stripe.png";
+    SeatMapper seatMapper = (SeatMapper) request.getAttribute("seatMapper");    //seat테이블 접근을 위한 mapper
+    List<SeatDto> seatDto = (List<SeatDto>) request.getAttribute("seatDto");    //seatDto 리스트
+    char maxRow = (char) request.getAttribute("maxRow");                        //최대 행
+    int maxNum = (int) request.getAttribute("maxNum");                          //최대 열
+    String r_idx = (String) request.getAttribute("r_idx");                      //현 영화관 아이디
+    String theaterName = (String) request.getAttribute("theaterName");          //현 영화관 이름
+    String roomName = (String) request.getAttribute("roomName");                //현 상영관 이름
+    int index=0;                                                                //각각의 seatDto 객체를 가져오기 위한 전역변수
 %>
-<!-- Modal -->
+<!-- 모달창 -->
+<%-- 모달창은 for문을 돌려 이 상영관의 좌석 수 만큼 만든다. 클릭하지 않으면 보이지 않음. --%>
+<%-- modal fade 클래스의 id로 각각의 좌석 구분 --%>
 <% for(int i=0;i<seatDto.size();i++){ %>
 <div class="modal fade" id="myModal<%=i%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
+        <%-- seat.jsp 에서 표시될 부분 --%>
     </div>
   </div>
 </div>
+
 <% } %>
 <div class="row" align="center" style="padding-top:40px">
     <h1 style="font-family:'맑은고딕';"><%=theaterName%> <%=roomName%></h1>
@@ -53,16 +57,14 @@ caption {
 <div class="row" align="center" style="padding-top:40px">
 <table>
    <caption class="caption"><center><b> S C R E E N </b></center></caption>
-   <tr height="100px">
-   <td>
-   <% for(char i='A';i<=maxRow;i++){ %>
-        <tr>
-        <td width="25px" height="25px" align="center"><b><%= i %></b>
-        <% for(int j=1;j<=maxNum;j++){ %>
-            <td width="30px" height="30px" style="padding:1px;">
-            <% if(seatMapper.isSeatExist(i,j,r_idx)){ %>
-            <% int colorNum = seatDto.get(index).getP_idx();
-                String color="";
+   <tr height="100px"><td>                                              <%-- 스크린과 좌석 사이의 빈 칸 --%>
+   <% for(char i='A';i<=maxRow;i++){ %>                                 <%-- A열부터 시작 --%>
+        <tr><td width="25px" height="25px" align="center"><b><%= i %></b>   <%-- 양쪽 끝의 열 알파벳 표시 --%>
+        <% for(int j=1;j<=maxNum;j++){ %>                               <%-- 해당 열의 1번 좌석부터 시작 --%>
+            <td width="30px" height="30px" style="padding:1px;">      <%-- 칸 하나 생성 --%>
+            <% if(seatMapper.isSeatExist(i,j,r_idx)){         %>      <%-- 좌석이 존재할 때만 버튼을 만든다 --%>
+            <% int colorNum = seatDto.get(index).getP_idx();  %>      <%-- 좌석 등급에 따른 색깔 설정 --%>
+            <%  String color="";
                 switch(colorNum){
                     case 1 : color = "#ed8c00"; break;
                     case 2 : color = "#01c73c"; break;
@@ -70,15 +72,21 @@ caption {
                     case 4 : color = "black"; break;
                  }
              %>
-                <a href="/seat/<%=seatDto.get(index).getS_idx()%>" type="button" style="display:block; line-height:22px; width:100%; vertical-align:middle; text-align:center; border-radius: 0px; border:3px solid <% out.print(color); %>; background-color:#888888" class="btn btn-xs" data-toggle="modal" data-target="#myModal<%=index%>">
-                <span style="font-size:12px; color: white;"><%= seatDto.get(index++).getSeatNum() %></span>
+                <a href="/seat/<%=seatDto.get(index).getS_idx()%>"            <%-- IndexController에 seat 매핑된 부분으로 s_idx 전달 --%>
+                    type="button"
+                    style="display:block; line-height:22px; width:100%; vertical-align:middle; text-align:center; border-radius: 0px; background-color:#888888; border:3px solid <%= color %>;"
+                    class="btn btn-xs" data-toggle="modal"
+                    data-target="#myModal<%=index%>">                         <%-- index에 해당하는 모달창과 연결 --%>
+                <span style="font-size:12px; color: white;">                  <%-- span 태그는 표시될 좌석번호의 텍스트 속성을 지정하기 위해 사용 --%>
+                    <%= seatDto.get(index++).getSeatNum() %>                  <%-- 해당 좌석의 좌석번호를 출력하고 전역변수인 index 더하기 --%>
+                </span>
                 </a>
             <% } %>
-            <% if(seatMapper.isHallWay(r_idx,j)){ %>
+            <% if(seatMapper.isHallWay(r_idx,j)){ %>                          <%-- 오른쪽이 복도측인 경우 테이블에 빈 칸을 출력 --%>
                 <td width="15px" height="25px">
             <% } %>
         <% } %>
-        <td width="25px" height="25px" align="center"><b><%= i %></b>
+        <td width="25px" height="25px" align="center"><b><%= i %></b>        <%-- 양쪽 끝의 열 알파벳 표시 --%>
         </tr>
     <% } %>
 </table>

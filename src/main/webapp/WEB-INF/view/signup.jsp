@@ -15,6 +15,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <script>
+    <%-- 회원가입 버튼을 클릭할 시 실행되는 내용 --%>\
+    <%-- /member/signup으로 post 메소드를 통해 아이디, 패스워드 전송. MemberController에서 처리. --%>
     $(document).ready(function() {
       $('#btnSignup').click(function() {
     	var passck1 = $('#userPw').val();
