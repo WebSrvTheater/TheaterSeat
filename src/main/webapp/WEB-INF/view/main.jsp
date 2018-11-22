@@ -41,7 +41,7 @@
             </button>
 
             <!-- Brand -->
-            <div class="brand-name-wrapper">
+            <div class="brand-name-wrapper" aling="center">
                 <a class="navbar-brand" href="/">
                     이 자리, 어떤가요?
                 </a>
@@ -53,7 +53,7 @@
     <div class="side-menu-container">
         <ul class="nav navbar-nav" style="height: 90%; width: 100%; overflow:auto;">
 
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> 로그인 </a></li>
+            <li><a href="/login" target="content"><span class="glyphicon glyphicon-user"></span> 로그인 </a></li>
 
             <!-- Dropdown-->
             <li class="panel panel-default" id="dropdown">

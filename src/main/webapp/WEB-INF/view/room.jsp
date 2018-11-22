@@ -3,6 +3,7 @@
 <%@ page import ="java.util.*"%>
 <%@ page import ="com.websrv.theaterseat.dto.SeatDto"%>
 <%@ page import ="com.websrv.theaterseat.mapper.SeatMapper"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +11,13 @@
 <!-- jQuery -->
 <script src="http://code.jquery.com/jquery-1.12.0.js"></script>
 <!-- Bootstrap -->
+<style>
+caption {
+    background-image: url("/resources/images/stripe.png");
+    background-position:center;
+    background-repeat:repeat;
+}
+</style>
 <link rel="stylesheet"
 	href="/resources/css/bootstrap.css">
 <link rel="stylesheet"
@@ -28,6 +36,7 @@
     String theaterName = (String) request.getAttribute("theaterName");
     String roomName = (String) request.getAttribute("roomName");
     int index=0;
+    String url="/resources/img/stripe.png";
 %>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -36,12 +45,12 @@
     </div>
   </div>
 </div>
-<div class="row" align="center" style="padding-top:40px">
-    <h1 style="font-family:'맑은고딕';"><%=theaterName%> <%=roomName%></h1>
+<div class="row" align="center" style="padding-top:50px">
+    <h2 style="font-family:'맑은고딕';"><%=theaterName%> <%=roomName%></h2>
 </div>
 <div class="row" align="center" style="padding-top:40px">
 <table>
-   <caption style="background-color: white; border:1px solid #000000;"><center><b> S C R E E N </b></center></caption>
+   <caption class="caption"><center><b> S C R E E N </b></center></caption>
    <tr height="100px">
    <td>
    <% for(char i='A';i<=maxRow;i++){ %>

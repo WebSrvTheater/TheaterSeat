@@ -16,7 +16,7 @@
 
 <script>
     $(document).ready(function() {
-      $('#btnSignup').click(function() {
+      $('#btnSignin').click(function() {
         $.ajax({
                   type: "post",
                   url: "/member/login",
@@ -59,7 +59,8 @@
 						required>
 				</div>
 				<p align="center">
-					<button id="btnSignup" class="btn btn-default">login</button>
+					<button id="btnSignin" class="btn btn-primary">로그인</button>
+					<a href="/signup" class="btn btn-default">회원가입</a>
 				</p>
 		</div>
 		<div id="msg" class="col-md-4 col-md-offset-4"></div>
