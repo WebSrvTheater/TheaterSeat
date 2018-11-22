@@ -64,7 +64,7 @@
                 </a>
             <% } %>
             <% if(seatMapper.isHallWay(r_idx,j)){ %>
-                <td width="25px" height="25px">
+                <td width="15px" height="25px">
             <% } %>
         <% } %>
         <td width="25px" height="25px" align="center"><b><%= i %></b>
