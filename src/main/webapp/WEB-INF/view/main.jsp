@@ -51,16 +51,14 @@
 
     <!-- Main Menu -->
     <div class="side-menu-container" >
-        <ul class="nav navbar-nav" style="overflow: auto; height: 100%;">
+        <ul class="nav navbar-nav" style="overflow: auto; height: 100%; width: 100%">
 
-            <li><a href="#"><span class="glyphicon glyphicon-send"></span> Link</a></li>
-            <li class="active"><a href="#"><span class="glyphicon glyphicon-plane"></span> Active Link</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-cloud"></span> Link</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Login </a></li>
 
             <!-- Dropdown-->
             <li class="panel panel-default" id="dropdown">
                 <a data-toggle="collapse" href="#dropdown-lvl1">
-                    <span class="glyphicon glyphicon-user"></span> Sub Level <span class="caret"></span>
+                    <span class="glyphicon glyphicon-search"></span> Sub Level <span class="caret"></span>
                 </a>
 
                 <!-- Dropdown level 1 -->
@@ -75,14 +73,14 @@
                             <!-- Dropdown level 2 -->
                             <li class="panel panel-default" id="dropdown">
                                 <a data-toggle="collapse" href="#dropdown-lvl<%out.print(i+2);%>">
-                                    <span class="glyphicon glyphicon-off"></span> <% out.print(theaterName); %> <span class="caret"></span>
+                                    <span class="glyphicon glyphicon-th-list"></span> <% out.print(theaterName); %> <span class="caret"></span>
                                 </a>
                                 <div id="dropdown-lvl<% out.print(i+2); %>" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
                                             <% for(int j=0;j<theaterMap.get(theaterName).size();j++) { %>
                                             <% String r_idx = theaterMap.get(theaterName).get(j); %>
-                                            <li class="roomlist"><a href="/room/<%=r_idx%>" target="content"><% out.print(roomMap.get(r_idx)); %></a></li>
+                                            <li class="roomlist"><a href="/room/<%=r_idx%>" class="seat" id="<%=r_idx%>" href="/room/<%=r_idx%>" target="content"><% out.print(roomMap.get(r_idx)); %></a></li>
                                             <% } %>
                                         </ul>
                                     </div>
@@ -94,8 +92,6 @@
                 </div>
             </li>
 
-            <li><a href="#"><span class="glyphicon glyphicon-signal"></span> Link</a></li>
-
         </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
@@ -103,9 +99,11 @@
     </div>
 
     <!-- Main Content -->
-    <div class="container-fluid" id="main-content>
+    <div class="container-fluid" id="main-content" style="padding-left:0px; padding-right:0px">
         <div class="side-body">
-           <iframe name="content" src="/login" height="100%" width="100%" border="0" frameborder="0" scrolling="auto"></iframe>
+            <div id="main-page">
+                <iframe name="content" src="/login" height="100%" width="100%" border="0" frameborder="0" scrolling="no"></iframe>
+            </div>
         </div>
     </div>
      </div>

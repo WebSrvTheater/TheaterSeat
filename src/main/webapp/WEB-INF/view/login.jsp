@@ -44,7 +44,7 @@
 <head>
 <title>SignUp</title>
 </head>
-<body>
+<body style>
 	<div class="row" id="main" style="padding-top: 100px;">
 		<div class="col-md-2 col-md-offset-5">
 			<h2 class="text-center">Login</h2>
