@@ -18,7 +18,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
-<body>
+<body style="overflow:auto">
 <%
     SeatMapper seatMapper = (SeatMapper) request.getAttribute("seatMapper");
     List<SeatDto> seatDto = (List<SeatDto>) request.getAttribute("seatDto");
@@ -36,10 +36,10 @@
     </div>
   </div>
 </div>
-<div class="row" align="center" style="padding-top:30px">
+<div class="row" align="center" style="padding-top:40px">
     <h1 style="font-family:'맑은고딕';"><%=theaterName%> <%=roomName%></h1>
 </div>
-<div class="row" align="center" style="padding-top:50px">
+<div class="row" align="center" style="padding-top:40px">
 <table>
    <caption style="background-color: white; border:1px solid #000000;"><center><b> S C R E E N </b></center></caption>
    <tr height="100px">
@@ -48,10 +48,19 @@
         <tr>
         <td width="25px" height="25px" align="center"><b><%= i %></b>
         <% for(int j=1;j<=maxNum;j++){ %>
-            <td width="25px" height="25px">
+            <td width="30px" height="30px" style="padding:1px;">
             <% if(seatMapper.isSeatExist(i,j,r_idx)){ %>
-                <a href="/seat" type="button" style="width:100%; border:1px solid #000000; background-color:#AAAAAA" class="btn btn-xs" data-toggle="modal" data-target="#myModal">
-                <font size="1.5" color="white"><%= seatDto.get(index++).getSeatNum() %></font>
+            <% int colorNum = seatDto.get(index).getP_idx();
+                String color="";
+                switch(colorNum){
+                    case 1 : color = "#ed8c00"; break;
+                    case 2 : color = "#01c73c"; break;
+                    case 3 : color = "#f71708"; break;
+                    case 4 : color = "black"; break;
+                 }
+             %>
+                <a href="/seat" type="button" style="display:block; line-height:22px; width:100%; vertical-align:middle; text-align:center; border-radius: 0px; border:3px solid <% out.print(color); %>; background-color:#888888" class="btn btn-xs" data-toggle="modal" data-target="#myModal">
+                <span style="font-size:12px; color: white;"><%= seatDto.get(index++).getSeatNum() %></span>
                 </a>
             <% } %>
             <% if(seatMapper.isHallWay(r_idx,j)){ %>

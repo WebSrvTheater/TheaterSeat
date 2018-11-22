@@ -4,6 +4,7 @@ public class SeatDto {
     private int s_idx;
     private char seatRow;
     private int seatNum;
+    private int p_idx;
 
     public int getS_idx() {
         return s_idx;
@@ -28,4 +29,8 @@ public class SeatDto {
     public void setSeatNum(int seatNum) {
         this.seatNum = seatNum;
     }
+
+    public int getP_idx() { return p_idx; }
+
+    public void setP_idx(int p_idx) { this.p_idx = p_idx; }
 }
