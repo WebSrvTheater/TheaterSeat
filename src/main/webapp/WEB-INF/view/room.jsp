@@ -3,6 +3,7 @@
 <%@ page import ="java.util.*"%>
 <%@ page import ="com.websrv.theaterseat.dto.SeatDto"%>
 <%@ page import ="com.websrv.theaterseat.mapper.SeatMapper"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +11,13 @@
 <!-- jQuery -->
 <script src="http://code.jquery.com/jquery-1.12.0.js"></script>
 <!-- Bootstrap -->
+<style>
+caption {
+    background-image: url("/resources/images/stripe.png");
+    background-position:center;
+    background-repeat:repeat;
+}
+</style>
 <link rel="stylesheet"
 	href="/resources/css/bootstrap.css">
 <link rel="stylesheet"
@@ -18,7 +26,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
-<body style="overflow:auto">
+<body style="width:100%; height:100%; margin-right:300px">
 <%
     SeatMapper seatMapper = (SeatMapper) request.getAttribute("seatMapper");
     List<SeatDto> seatDto = (List<SeatDto>) request.getAttribute("seatDto");
@@ -28,6 +36,7 @@
     String theaterName = (String) request.getAttribute("theaterName");
     String roomName = (String) request.getAttribute("roomName");
     int index=0;
+    String url="/resources/img/stripe.png";
 %>
 <!-- Modal -->
 <% for(int i=0;i<seatDto.size();i++){ %>
@@ -43,7 +52,7 @@
 </div>
 <div class="row" align="center" style="padding-top:40px">
 <table>
-   <caption style="background-color: white; border:1px solid #000000;"><center><b> S C R E E N </b></center></caption>
+   <caption class="caption"><center><b> S C R E E N </b></center></caption>
    <tr height="100px">
    <td>
    <% for(char i='A';i<=maxRow;i++){ %>

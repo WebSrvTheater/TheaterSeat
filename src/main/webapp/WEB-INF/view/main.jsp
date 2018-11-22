@@ -41,7 +41,7 @@
             </button>
 
             <!-- Brand -->
-            <div class="brand-name-wrapper">
+            <div class="brand-name-wrapper" aling="center">
                 <a class="navbar-brand" href="/">
                     이 자리, 어떤가요?
                 </a>
@@ -50,10 +50,10 @@
     </div>
 
     <!-- Main Menu -->
-    <div class="side-menu-container" >
-        <ul class="nav navbar-nav" style="overflow: auto; height: 100%; width: 100%;">
+    <div class="side-menu-container">
+        <ul class="nav navbar-nav" style="height: 90%; width: 100%; overflow:auto;">
 
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> 로그인 </a></li>
+            <li><a href="/login" target="content"><span class="glyphicon glyphicon-user"></span> 로그인 </a></li>
 
             <!-- Dropdown-->
             <li class="panel panel-default" id="dropdown">
@@ -73,14 +73,14 @@
                             <!-- Dropdown level 2 -->
                             <li class="panel panel-default" id="dropdown">
                                 <a data-toggle="collapse" href="#dropdown-lvl<%out.print(i+2);%>">
-                                    <span class="glyphicon glyphicon-off"></span> <% out.print(theaterName); %> <span class="caret"></span>
+                                    <span class="glyphicon glyphicon-th-list"></span> <% out.print(theaterName); %> <span class="caret"></span>
                                 </a>
                                 <div id="dropdown-lvl<% out.print(i+2); %>" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
                                             <% for(int j=0;j<theaterMap.get(theaterName).size();j++) { %>
                                             <% String r_idx = theaterMap.get(theaterName).get(j); %>
-                                            <li class="roomlist"><a href="/room/<%=r_idx%>" target="content"><% out.print(roomMap.get(r_idx)); %></a></li>
+                                            <li class="roomlist"><a href="/room/<%=r_idx%>" class="seat" id="<%=r_idx%>" href="/room/<%=r_idx%>" target="content"><% out.print(roomMap.get(r_idx)); %></a></li>
                                             <% } %>
                                         </ul>
                                     </div>
@@ -99,9 +99,11 @@
     </div>
 
     <!-- Main Content -->
-    <div class="container-fluid" id="main-content>
+    <div class="container-fluid" id="main-content">
         <div class="side-body">
-           <iframe name="content" src="/login" height="100%" width="100%" border="0" frameborder="0" scrolling="auto"></iframe>
+            <div id="main-page">
+                <iframe name="content" src="/login" height="100%" width="100%" border="0" frameborder="0" scrolling="auto"></iframe>
+            </div>
         </div>
     </div>
      </div>
