@@ -22,10 +22,11 @@
 </head>
 
 <body>
+
 <div class="row">
     <!-- uncomment code for absolute positioning tweek see top comment in css -->
     <!-- <div class="absolute-wrapper"> -->
-    <!-- Menu -->
+    <!-- 사이드바 -->
     <div class="side-menu">
 
     <nav class="navbar navbar-default" role="navigation">
@@ -40,7 +41,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <!-- Brand -->
+            <!-- 사이드바 제목 -->
             <div class="brand-name-wrapper" aling="center">
                 <a class="navbar-brand" href="/">
                     이 자리, 어떤가요?
@@ -49,38 +50,44 @@
         </div>
     </div>
 
-    <!-- Main Menu -->
+    <!-- 사이드바 메뉴 틀 -->
     <div class="side-menu-container">
         <ul class="nav navbar-nav" style="height: 90%; width: 100%; overflow:auto;">
 
             <li><a href="/login" target="content"><span class="glyphicon glyphicon-user"></span> 로그인 </a></li>
 
-            <!-- Dropdown-->
+            <!-- 드롭다운 시작 -->
             <li class="panel panel-default" id="dropdown">
                 <a data-toggle="collapse" href="#dropdown-lvl1">
                     <span class="glyphicon glyphicon-search"></span> 영화관 찾기 <span class="caret"></span>
                 </a>
 
-                <!-- Dropdown level 1 -->
+                <!-- 영화관 드롭다운 -->
+                <% List<String> theaterNameList = (List<String>) request.getAttribute("theaterNameList");
+                   Map<String, List<String>> theaterMap = (Map<String, List<String>>) request.getAttribute("theaterMap");
+                   Map<String, String> roomMap = (Map<String,String>) request.getAttribute("roomMap"); %>
                 <div id="dropdown-lvl1" class="panel-collapse collapse">
-                <% List<String> theaterNameList = (List<String>) request.getAttribute("theaterNameList"); %>
-                <% Map<String, List<String>> theaterMap = (Map<String, List<String>>) request.getAttribute("theaterMap"); %>
-                <% Map<String, String> roomMap = (Map<String,String>) request.getAttribute("roomMap"); %>
-                <% for(int i=0;i<theaterMap.size();i++){ %>
-                <% String theaterName = theaterNameList.get(i); %>
+                <%-- 영화관 수 만큼 드롭다운 생성 --%>
+                <% for(int i=0;i<theaterMap.size();i++){
+                   String theaterName = theaterNameList.get(i); %>
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
-                            <!-- Dropdown level 2 -->
+                            <!-- 상영관 드롭다운 -->
                             <li class="panel panel-default" id="dropdown">
-                                <a data-toggle="collapse" href="#dropdown-lvl<%out.print(i+2);%>">
-                                    <span class="glyphicon glyphicon-th-list"></span> <% out.print(theaterName); %> <span class="caret"></span>
+                                <a data-toggle="collapse" href="#dropdown-lvl<%= i+2 %>">
+                                    <span class="glyphicon glyphicon-th-list"></span> <%= theaterName %> <span class="caret"></span>
                                 </a>
-                                <div id="dropdown-lvl<% out.print(i+2); %>" class="panel-collapse collapse">
+                                <!-- 상영관에 따른 드롭다운 레벨 구분 -->
+                                <div id="dropdown-lvl<%= i+2 %>" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
+                                            <%-- 상영관 수 만큼 드롭다운 생성 --%>
                                             <% for(int j=0;j<theaterMap.get(theaterName).size();j++) { %>
                                             <% String r_idx = theaterMap.get(theaterName).get(j); %>
-                                            <li class="roomlist"><a href="/room/<%=r_idx%>" class="seat" id="<%=r_idx%>" href="/room/<%=r_idx%>" target="content"><% out.print(roomMap.get(r_idx)); %></a></li>
+                                            <li class="roomlist">
+                                                <%-- 클릭시 r_idx에 해당하는 상영관 정보를 메인페이지에 전시 --%>
+                                                <a href="/room/<%=r_idx%>" class="seat" target="content"><%= roomMap.get(r_idx) %></a>
+                                            </li>
                                             <% } %>
                                         </ul>
                                     </div>
@@ -93,15 +100,16 @@
             </li>
 
         </ul>
-    </div><!-- /.navbar-collapse -->
+    </div><!-- 사이드바 끝 -->
 </nav>
 
     </div>
 
-    <!-- Main Content -->
+    <!-- 메인페이지 -->
     <div class="container-fluid" id="main-content">
         <div class="side-body">
             <div id="main-page">
+                <%-- 초기페이지는 login --%>
                 <iframe name="content" src="/login" height="100%" width="100%" border="0" frameborder="0" scrolling="auto"></iframe>
             </div>
         </div>

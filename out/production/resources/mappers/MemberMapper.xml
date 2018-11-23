@@ -5,7 +5,7 @@
 
 <mapper namespace="com.websrv.theaterseat.mapper.MemberMapper">
 
-    <select id="selectMemberList" parameterType="com.websrv.theaterseat.dto.MemberDto" resultType="com.websrv.theaterseat.dto.MemberDto">
+    <select id="selectMemberList" resultType="com.websrv.theaterseat.dto.MemberDto">
         select * from member
     </select>
 

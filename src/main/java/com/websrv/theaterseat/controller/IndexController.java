@@ -18,6 +18,10 @@ import java.util.*;
 @Controller
 public class IndexController {
 
+    /**
+     * 해당 Url과 jsp 뷰 페이지를 매핑해주는 컨트롤러
+     */
+
     @Autowired
     TheaterMapper theaterMapper;
 
@@ -25,45 +29,48 @@ public class IndexController {
     SeatMapper seatMapper;
 
     @RequestMapping("/")
-    public String index(Model model) throws Exception{
+    public String index(Model model) throws Exception {
         // t_idx에 해당하는 r_idx 리스트 매핑
-        Map <String, List<String>> theaterMap = new HashMap<String, List<String>>();
+        Map<String, List<String>> theaterMap = new HashMap<String, List<String>>();
         // r_idx에 해당하는 roomName 매핑
-        Map <String, String> roomMap = new HashMap<String, String>();
+        Map<String, String> roomMap = new HashMap<String, String>();
 
-        List<String> theaterNameList = theaterMapper.selectAllTheaterName();
-        List<String> roomNameList = theaterMapper.selectAllRoomName();
+        List<String> theaterNameList = theaterMapper.selectAllTheaterName();    // 모든 영화관 이름 리스트로 저장
+        List<String> roomNameList = theaterMapper.selectAllRoomName();          // 모든 상영관 이름 리스트로 저장
 
-        for(int i=0;i<theaterNameList.size();i++){
-            theaterMap.put(theaterNameList.get(i),theaterMapper.selectRoomIdx(String.valueOf(i+1)));
+        for (int i = 0; i < theaterNameList.size(); i++) {
+            theaterMap.put(theaterNameList.get(i), theaterMapper.selectRoomIdx(String.valueOf(i + 1)));    // 영화관에 소속된 r_idx 리스트를 영화관에 매핑
         }
 
-        for(int i=0;i<roomNameList.size();i++){
-            roomMap.put(String.valueOf(i+1) , roomNameList.get(i));
+        for (int i = 0; i < roomNameList.size(); i++) {
+            roomMap.put(String.valueOf(i + 1), roomNameList.get(i));             // 상영관 idx에 상영관 이름 매핑
         }
 
-        model.addAttribute("theaterNameList",theaterNameList);
+        model.addAttribute("theaterNameList", theaterNameList);
         model.addAttribute("theaterMap", theaterMap);
-        model.addAttribute("roomMap",roomMap);
+        model.addAttribute("roomMap", roomMap);
         return "main";
     }
 
     @RequestMapping("/signup")
-    public String signup(Model model) throws Exception{
+    public String signup(Model model) throws Exception {
 
         return "signup";
     }
+
     @RequestMapping("/login")
-    public String login(Model mode) throws Exception{
+    public String login(Model mode) throws Exception {
         return "login";
     }
 
+    //상영관 좌석정보 매핑
     @GetMapping("/room/{r_idx}")
     public String roomNum(Model model, @PathVariable String r_idx) throws Exception {
-        //PrintWriter out = res.getWriter();
 
+        //r_idx에 해당하는 좌석의 정보를 가진 객체 리스트
         List<SeatDto> seatDto = seatMapper.selectAllSeats(r_idx);
 
+        //jsp 페이지에 영화관 좌석 테이블을 그리기 위한 최대 열, 좌석 설정
         int maxNum = seatMapper.selectMaxNum(r_idx);
         char maxRow = seatMapper.selectMaxRow(r_idx);
 
@@ -75,12 +82,13 @@ public class IndexController {
         model.addAttribute("theaterName", seatMapper.selectTheaterName(r_idx));
         model.addAttribute("roomName", seatMapper.selectRoomName(r_idx));
 
-
         return "room";
     }
+
+    //각각의 좌석 게시판 매핑
     @GetMapping("/seat/{s_idx}")
-    public String seat(Model model, @PathVariable String s_idx) throws Exception{
-        model.addAttribute("s_idx",s_idx);
+    public String seat(Model model, @PathVariable String s_idx) throws Exception {
+        model.addAttribute("s_idx", s_idx);
         return "seat";
     }
 }
