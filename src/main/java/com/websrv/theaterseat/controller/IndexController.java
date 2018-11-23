@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Controller
@@ -53,13 +54,22 @@ public class IndexController {
     }
 
     @RequestMapping("/signup")
-    public String signup(Model model) throws Exception {
-
+    public String signup(HttpSession session, Model model) throws Exception {
         return "signup";
     }
 
     @RequestMapping("/login")
-    public String login(Model mode) throws Exception {
+    public String login(HttpSession session, Model mode) throws Exception {
+        if(session.getAttribute("id")!=null) {
+            return "hello";
+        } else {
+            return "login";
+        }
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session, Model model) throws Exception {
+        session.invalidate();
         return "login";
     }
 
@@ -91,4 +101,12 @@ public class IndexController {
         model.addAttribute("s_idx", s_idx);
         return "seat";
     }
+
+
+    @RequestMapping("/hello")
+    public String hello() throws Exception {
+
+        return "hello";
+    }
+
 }

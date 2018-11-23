@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html;charset=utf-8"%>
-<%@ page session="false"%>
 <!-- @author : heedong111 -->
 
 <html>
@@ -15,7 +14,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <script>
-    <%-- 로그인 버튼을 클릭할 시 실행되는 내용 --%>\
+    <%-- 로그인 버튼을 클릭할 시 실행되는 내용 --%>
     <%-- /member/login으로 post 메소드를 통해 아이디, 패스워드 전송. MemberController에서 처리. --%>
     $(document).ready(function() {
       $('#btnSignin').click(function() {
@@ -28,7 +27,7 @@
                   success: function(response) {
                 	  if(response.code == '200') {
       					alert(response.message);
-      					window.location.href="/";
+      					parent.window.location.reload();
       				}
       					else {
       					alert(response.message);

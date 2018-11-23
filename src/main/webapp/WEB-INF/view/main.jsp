@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html;charset=utf-8"%>
-<%@ page session="false"%>
 <%@ page import ="java.util.*"%>
 <!-- @author : heedong111 -->
 <html>
@@ -54,7 +53,10 @@
     <div class="side-menu-container">
         <ul class="nav navbar-nav" style="height: 90%; width: 100%; overflow:auto;">
 
-            <li><a href="/login" target="content"><span class="glyphicon glyphicon-user"></span> 로그인 </a></li>
+            <% if(session.getAttribute("id")==null){ %>
+            <li><a href="/login" target="content"><span class="glyphicon glyphicon-user"></span> 로그인
+            <% } else { %>
+            <li><a href="/logout" target="content" id="logout"><span class="glyphicon glyphicon-user"></span> 로그아웃 <% } %></a></li>
 
             <!-- 드롭다운 시작 -->
             <li class="panel panel-default" id="dropdown">
@@ -138,6 +140,10 @@
                 /// uncomment code for absolute positioning tweek see top comment in css
                 //$('.absolute-wrapper').removeClass('slide-in');
 
+            });
+            $('#logout').click(function() {
+                alert("로그아웃 되었습니다.");
+                parent.window.location.reload();
             });
         });
     </script>
