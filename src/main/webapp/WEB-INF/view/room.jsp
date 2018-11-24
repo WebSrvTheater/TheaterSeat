@@ -11,6 +11,7 @@
 <!-- jQuery -->
 <script src="http://code.jquery.com/jquery-1.12.0.js"></script>
 <!-- Bootstrap -->
+<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans" rel="stylesheet">
 <style>
 caption {
     background-image: url("/resources/images/stripe.png");
@@ -52,7 +53,8 @@ caption {
 
 <% } %>
 <div class="row" align="center" style="padding-top:40px">
-    <h1 style="font-family:'맑은고딕';"><%=theaterName%> <%=roomName%></h1>
+    <h1 style="font-family: 'Black Han Sans', sans-serif;"><%=theaterName%> <%=roomName%></h1>
+    <hr>
 </div>
 <div class="row" align="center" style="padding-top:40px">
 <table>
@@ -69,12 +71,12 @@ caption {
                     case 1 : color = "#ed8c00"; break;
                     case 2 : color = "#01c73c"; break;
                     case 3 : color = "#f71708"; break;
-                    case 4 : color = "black"; break;
+                    case 4 : color = "#5d822e"; break;
                  }
              %>
                 <a href="/seat/<%=seatDto.get(index).getS_idx()%>"            <%-- IndexController에 seat 매핑된 부분으로 s_idx 전달 --%>
                     type="button"
-                    style="display:block; line-height:22px; width:100%; vertical-align:middle; text-align:center; border-radius: 0px; background-color:#888888; border:3px solid <%= color %>;"
+                    style="display:block; line-height:22px; width:100%; vertical-align:middle; text-align:center; border-radius: 0px; background-color:<%if(colorNum==4){%>#5d822e;<%}else{%>#888888;<%}%> border:3px solid <%= color %>;"
                     class="btn btn-xs" data-toggle="modal"
                     data-target="#myModal<%=index%>">                         <%-- index에 해당하는 모달창과 연결 --%>
                 <span style="font-size:12px; color: white;">                  <%-- span 태그는 표시될 좌석번호의 텍스트 속성을 지정하기 위해 사용 --%>
@@ -89,6 +91,19 @@ caption {
         <td width="25px" height="25px" align="center"><b><%= i %></b>        <%-- 양쪽 끝의 열 알파벳 표시 --%>
         </tr>
     <% } %>
+</table>
+</div>
+<div class="row" align="center" style="padding-top:40px">
+<table>
+    <tr>
+    <td style="width:20px; height:20px; display:block; line-height:22px; border-radius: 0px; background-color:#888888; border:3px solid #ed8c00;">
+    <td style="padding-left:5px; padding-right:5px;">Economy Zone
+    <td style="width:20px; height:20px; display:block; line-height:22px; border-radius: 0px; background-color:#888888; border:3px solid #01c73c;">
+    <td style="padding-left:5px; padding-right:5px;">Standart Zone
+    <td style="width:20px; height:20px; display:block; line-height:22px; border-radius: 0px; background-color:#888888; border:3px solid #f71708;">
+    <td style="padding-left:5px; padding-right:5px;">Prime Zone
+    <td style="width:20px; height:20px; display:block; line-height:22px; border-radius: 0px; background-color:#5d822e; border:3px solid #5d822e;">
+    <td style="padding-left:5px; padding-right:5px;">장애인석
 </table>
 </div>
 </body>

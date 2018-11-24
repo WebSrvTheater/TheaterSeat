@@ -41,7 +41,7 @@
             </button>
 
             <!-- 사이드바 제목 -->
-            <div class="brand-name-wrapper" aling="center">
+            <div class="brand-name-wrapper" align="center">
                 <a class="navbar-brand" href="/">
                     이 자리, 어떤가요?
                 </a>
