@@ -92,8 +92,9 @@ caption {
         </tr>
     <% } %>
 </table>
+<hr>
 </div>
-<div class="row" align="center" style="padding-top:40px">
+<div class="row" align="center" style="padding-top:20px">
 <table>
     <tr>
     <td style="width:20px; height:20px; display:block; line-height:22px; border-radius: 0px; background-color:#888888; border:3px solid #ed8c00;">
