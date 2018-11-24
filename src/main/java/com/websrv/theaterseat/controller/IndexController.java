@@ -46,7 +46,7 @@ public class IndexController {
         for (int i = 0; i < roomNameList.size(); i++) {
             roomMap.put(String.valueOf(i + 1), roomNameList.get(i));             // 상영관 idx에 상영관 이름 매핑
         }
-
+        model.addAttribute("seatMapper",seatMapper);
         model.addAttribute("theaterNameList", theaterNameList);
         model.addAttribute("theaterMap", theaterMap);
         model.addAttribute("roomMap", roomMap);

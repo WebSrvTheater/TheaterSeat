@@ -38,6 +38,8 @@ caption {
     String theaterName = (String) request.getAttribute("theaterName");          //현 영화관 이름
     String roomName = (String) request.getAttribute("roomName");                //현 상영관 이름
     int index=0;                                                                //각각의 seatDto 객체를 가져오기 위한 전역변수
+    boolean disabled=false;
+    boolean sweetbox=false;
 %>
 <!-- 모달창 -->
 <%-- 모달창은 for문을 돌려 이 상영관의 좌석 수 만큼 만든다. 클릭하지 않으면 보이지 않음. --%>
@@ -71,12 +73,13 @@ caption {
                     case 1 : color = "#ed8c00"; break;
                     case 2 : color = "#01c73c"; break;
                     case 3 : color = "#f71708"; break;
-                    case 4 : color = "#5d822e"; break;
+                    case 4 : color = "#5d822e"; disabled=true; break;
+                    case 5 : color = "#da1b68"; sweetbox=true; break;
                  }
              %>
                 <a href="/seat/<%=seatDto.get(index).getS_idx()%>"            <%-- IndexController에 seat 매핑된 부분으로 s_idx 전달 --%>
                     type="button"
-                    style="display:block; line-height:22px; width:100%; vertical-align:middle; text-align:center; border-radius: 0px; background-color:<%if(colorNum==4){%>#5d822e;<%}else{%>#888888;<%}%> border:3px solid <%= color %>;"
+                    style="display:block; line-height:22px; width:100%; vertical-align:middle; text-align:center; border-radius: 0px; background-color:<%if(colorNum>3){ out.print(color);%>;<%}else{%>#888888;<%}%> border:3px solid <%= color %>;"
                     class="btn btn-xs" data-toggle="modal"
                     data-target="#myModal<%=index%>">                         <%-- index에 해당하는 모달창과 연결 --%>
                 <span style="font-size:12px; color: white;">                  <%-- span 태그는 표시될 좌석번호의 텍스트 속성을 지정하기 위해 사용 --%>
@@ -100,11 +103,17 @@ caption {
     <td style="width:20px; height:20px; display:block; line-height:22px; border-radius: 0px; background-color:#888888; border:3px solid #ed8c00;">
     <td style="padding-left:5px; padding-right:5px;">Economy Zone
     <td style="width:20px; height:20px; display:block; line-height:22px; border-radius: 0px; background-color:#888888; border:3px solid #01c73c;">
-    <td style="padding-left:5px; padding-right:5px;">Standart Zone
+    <td style="padding-left:5px; padding-right:5px;">Standard Zone
     <td style="width:20px; height:20px; display:block; line-height:22px; border-radius: 0px; background-color:#888888; border:3px solid #f71708;">
     <td style="padding-left:5px; padding-right:5px;">Prime Zone
+    <% if(disabled) { %>
     <td style="width:20px; height:20px; display:block; line-height:22px; border-radius: 0px; background-color:#5d822e; border:3px solid #5d822e;">
     <td style="padding-left:5px; padding-right:5px;">장애인석
+    <% } %>
+    <% if(sweetbox) { %>
+        <td style="width:20px; height:20px; display:block; line-height:22px; border-radius: 0px; background-color:#da1b68; border:3px solid #da1b68;">
+        <td style="padding-left:5px; padding-right:5px;">SWEETBOX
+    <% } %>
 </table>
 </div>
 </body>
