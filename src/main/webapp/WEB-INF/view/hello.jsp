@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="/signup">회원가입</a>
-<a href="/login">로그인</a>
+    <%
+        out.print(session.getAttribute("id"));
+    %>
 </body>
 </html>

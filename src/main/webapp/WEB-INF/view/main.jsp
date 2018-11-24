@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html;charset=utf-8"%>
-<%@ page session="false"%>
 <%@ page import ="java.util.*"%>
+<%@ page import ="com.websrv.theaterseat.mapper.SeatMapper"%>
 <!-- @author : heedong111 -->
 <html>
 <head>
@@ -42,7 +42,7 @@
             </button>
 
             <!-- 사이드바 제목 -->
-            <div class="brand-name-wrapper" aling="center">
+            <div class="brand-name-wrapper" align="center">
                 <a class="navbar-brand" href="/">
                     이 자리, 어떤가요?
                 </a>
@@ -54,7 +54,10 @@
     <div class="side-menu-container">
         <ul class="nav navbar-nav" style="height: 90%; width: 100%; overflow:auto;">
 
-            <li><a href="/login" target="content"><span class="glyphicon glyphicon-user"></span> 로그인 </a></li>
+            <% if(session.getAttribute("id")==null){ %>
+            <li><a href="/login" target="content"><span class="glyphicon glyphicon-user"></span> 로그인
+            <% } else { %>
+            <li><a href="/logout" target="content" id="logout"><span class="glyphicon glyphicon-user"></span> 로그아웃 <% } %></a></li>
 
             <!-- 드롭다운 시작 -->
             <li class="panel panel-default" id="dropdown">
@@ -65,7 +68,8 @@
                 <!-- 영화관 드롭다운 -->
                 <% List<String> theaterNameList = (List<String>) request.getAttribute("theaterNameList");
                    Map<String, List<String>> theaterMap = (Map<String, List<String>>) request.getAttribute("theaterMap");
-                   Map<String, String> roomMap = (Map<String,String>) request.getAttribute("roomMap"); %>
+                   Map<String, String> roomMap = (Map<String,String>) request.getAttribute("roomMap");
+                   SeatMapper seatMapper = (SeatMapper) request.getAttribute("seatMapper"); %>
                 <div id="dropdown-lvl1" class="panel-collapse collapse">
                 <%-- 영화관 수 만큼 드롭다운 생성 --%>
                 <% for(int i=0;i<theaterMap.size();i++){
@@ -83,11 +87,13 @@
                                         <ul class="nav navbar-nav">
                                             <%-- 상영관 수 만큼 드롭다운 생성 --%>
                                             <% for(int j=0;j<theaterMap.get(theaterName).size();j++) { %>
-                                            <% String r_idx = theaterMap.get(theaterName).get(j); %>
-                                            <li class="roomlist">
-                                                <%-- 클릭시 r_idx에 해당하는 상영관 정보를 메인페이지에 전시 --%>
-                                                <a href="/room/<%=r_idx%>" class="seat" target="content"><%= roomMap.get(r_idx) %></a>
-                                            </li>
+                                                <% String r_idx = theaterMap.get(theaterName).get(j); %>
+                                                <% if(seatMapper.selectAllSeats(r_idx).size() > 0) { %>             <%-- DB에 좌석 정보가 있는 상영관만 출력 --%>
+                                                <li class="roomlist">
+                                                    <%-- 클릭시 r_idx에 해당하는 상영관 정보를 메인페이지에 전시 --%>
+                                                    <a href="/room/<%=r_idx%>" class="seat" target="content"><%= roomMap.get(r_idx) %></a>
+                                                </li>
+                                                <% } %>
                                             <% } %>
                                         </ul>
                                     </div>
@@ -138,6 +144,10 @@
                 /// uncomment code for absolute positioning tweek see top comment in css
                 //$('.absolute-wrapper').removeClass('slide-in');
 
+            });
+            $('#logout').click(function() {
+                alert("로그아웃 되었습니다.");
+                parent.window.location.reload();
             });
         });
     </script>

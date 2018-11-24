@@ -5,10 +5,9 @@ import com.websrv.theaterseat.service.MemberService;
 import com.websrv.theaterseat.view.ResultView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/member")
@@ -37,10 +36,10 @@ public class MemberController {
     //로그인
     @ResponseBody
     @PostMapping(value = "/login", produces = "application/json")
-    public ResultView chkMember(@RequestBody MemberDto memberDto) {
+    public ResultView chkMember(HttpSession session, @RequestBody MemberDto memberDto) {
         try {
             //MemberService에 정의된 기능을 실행한 후 해당 정보로 로그인
-            return memberService.chkMember(memberDto);
+            return memberService.chkMember(session, memberDto);
         } catch (Exception e) {
             throw e;
         }
