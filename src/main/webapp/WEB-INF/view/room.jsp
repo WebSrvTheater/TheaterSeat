@@ -61,7 +61,7 @@ caption {
    <caption class="caption"><center><b> S C R E E N </b></center></caption>
    <tr height="100px"><td>                                              <%-- 스크린과 좌석 사이의 빈 칸 --%>
    <% for(char i='A';i<=maxRow;i++){ %>                                 <%-- A열부터 시작 --%>
-        <tr><td width="25px" height="25px" align="center"><b><%= i %></b>   <%-- 양쪽 끝의 열 알파벳 표시 --%>
+        <tr><td width="25px" height="25px" align="center" style="border-top: solid #eeeeee"><b><%= i %></b>   <%-- 양쪽 끝의 열 알파벳 표시 --%>
         <% for(int j=1;j<=maxNum;j++){ %>                               <%-- 해당 열의 1번 좌석부터 시작 --%>
             <td width="30px" height="30px" style="padding:1px;">      <%-- 칸 하나 생성 --%>
             <% if(seatMapper.isSeatExist(i,j,r_idx)){         %>      <%-- 좌석이 존재할 때만 버튼을 만든다 --%>
@@ -88,7 +88,7 @@ caption {
                 <td width="15px" height="25px">
             <% } %>
         <% } %>
-        <td width="25px" height="25px" align="center"><b><%= i %></b>        <%-- 양쪽 끝의 열 알파벳 표시 --%>
+        <td width="25px" height="25px" align="center" style="border-top: solid #eeeeee"><b><%= i %></b>        <%-- 양쪽 끝의 열 알파벳 표시 --%>
         </tr>
     <% } %>
 </table>
