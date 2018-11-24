@@ -21,7 +21,7 @@
 
 </head>
 
-<body>
+<body style="background-color:#333333;">
 
 <div class="row">
     <!-- uncomment code for absolute positioning tweek see top comment in css -->

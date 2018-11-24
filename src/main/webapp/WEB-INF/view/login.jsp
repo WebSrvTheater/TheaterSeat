@@ -45,7 +45,7 @@
 <head>
 <title>SignUp</title>
 </head>
-<body style>
+<body style="background-color:#333333; color:white">
 	<div class="row" id="main" style="padding-top: 100px;">
 		<div class="col-md-2 col-md-offset-5">
 			<h2 class="text-center">Login</h2>

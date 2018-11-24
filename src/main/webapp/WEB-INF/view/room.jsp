@@ -27,7 +27,7 @@ caption {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
-<body style="width:100%; height:100%; margin-right:300px">
+<body style="width:100%; height:100%; margin-right:300px; background-color:#333333;">
 <%-- Attribute 변수 선언부 --%>
 <%
     SeatMapper seatMapper = (SeatMapper) request.getAttribute("seatMapper");    //seat테이블 접근을 위한 mapper
@@ -55,15 +55,15 @@ caption {
 
 <% } %>
 <div class="row" align="center" style="padding-top:40px">
-    <h1 style="font-family: 'Black Han Sans', sans-serif;"><%=theaterName%> <%=roomName%></h1>
+    <h1 style="font-family: 'Black Han Sans', sans-serif; color:white;"><%=theaterName%> <%=roomName%></h1>
     <hr>
 </div>
-<div class="row" align="center" style="padding-top:40px">
+<div class="row" align="center" style="color:white; padding-top:40px; padding-bottom:40px;">
 <table>
-   <caption class="caption"><center><b> S C R E E N </b></center></caption>
+   <caption class="caption"><center><b style="color:white;"> S C R E E N </b></center></caption>
    <tr height="100px"><td>                                              <%-- 스크린과 좌석 사이의 빈 칸 --%>
    <% for(char i='A';i<=maxRow;i++){ %>                                 <%-- A열부터 시작 --%>
-        <tr><td width="25px" height="25px" align="center" style="border-top: solid #eeeeee"><b><%= i %></b>   <%-- 양쪽 끝의 열 알파벳 표시 --%>
+        <tr><td width="25px" height="25px" align="center" style="border-top: solid #dddddd"><b><%= i %></b>   <%-- 양쪽 끝의 열 알파벳 표시 --%>
         <% for(int j=1;j<=maxNum;j++){ %>                               <%-- 해당 열의 1번 좌석부터 시작 --%>
             <td width="30px" height="30px" style="padding:1px;">      <%-- 칸 하나 생성 --%>
             <% if(seatMapper.isSeatExist(i,j,r_idx)){         %>      <%-- 좌석이 존재할 때만 버튼을 만든다 --%>
@@ -91,13 +91,13 @@ caption {
                 <td width="15px" height="25px">
             <% } %>
         <% } %>
-        <td width="25px" height="25px" align="center" style="border-top: solid #eeeeee"><b><%= i %></b>        <%-- 양쪽 끝의 열 알파벳 표시 --%>
+        <td width="25px" height="25px" align="center" style="border-top: solid #dddddd"><b><%= i %></b>        <%-- 양쪽 끝의 열 알파벳 표시 --%>
         </tr>
     <% } %>
 </table>
-<hr>
 </div>
-<div class="row" align="center" style="padding-top:20px">
+<div class="row" align="center" style="color:white;">
+<hr>
 <table>
     <tr>
     <td style="width:20px; height:20px; display:block; line-height:22px; border-radius: 0px; background-color:#888888; border:3px solid #ed8c00;">
