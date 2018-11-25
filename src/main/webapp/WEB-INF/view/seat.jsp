@@ -3,9 +3,22 @@
 <%@ page import ="java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-1.12.0.js"></script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script>
+    $(document).ready(function(){
+      $("#btnSave").click(function(){
+        $.ajax({
+            type: "post",
+            url: "/board/writing",
+            contentType: "application/json;charset=utf-8",
+        })
+      })
+    })
+</script>
 </head>
 <body>
 <%
@@ -23,6 +36,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" id ="btnSave" class="btn btn-primary">Save message</button>
 </body>
 </html>
