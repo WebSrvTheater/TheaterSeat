@@ -15,10 +15,20 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <script>
-    <%-- 회원가입 버튼을 클릭할 시 실행되는 내용 --%>\
+    <%-- 회원가입 버튼을 클릭할 시 실행되는 내용 --%>
     <%-- /member/signup으로 post 메소드를 통해 아이디, 패스워드 전송. MemberController에서 처리. --%>
     $(document).ready(function() {
       $('#btnSignup').click(function() {
+        //아이디 유효성 검사
+        var userId = $('#userId').val();
+        for(var i=0; i<userId.length;i++){
+            var chk = userId.substring(i,i+1);
+            if(chk.match(/[^\w]/)){
+                alert("아이디는 공백 없이 숫자와 영문만 입력 가능합니다.");
+                return false;
+            }
+        }
+        //패스워드 유효성 검사
     	var passck1 = $('#userPw').val();
     	var passck2 = $('#passwdck').val();
     	if(passck1 != passck2){
@@ -36,7 +46,7 @@
                   success: function(response) {
                 	  if(response.code == '200') {
       					alert(response.message);
-      					window.location.href="/";
+      					parent.window.location.reload();
       				}
       					else {
       					alert(response.message);
@@ -54,6 +64,8 @@
 <style>
 body {
 	padding-top: 100px;
+	background-color: #333333;
+	color:white;
 }
 </style>
 
@@ -67,7 +79,7 @@ body {
 				<div class="form-group">
 					<label for="userId">아이디</label> <input type="text"
 						class="form-control" id="userId" name="userId"
-						placeholder="아이디를 입력하세요" required>
+						placeholder="아이디를 입력하세요" style="ime-mode:inactive" required>
 				</div>
 				<div class="form-group">
 					<label for="userPw">패스워드</label> <input type="password"

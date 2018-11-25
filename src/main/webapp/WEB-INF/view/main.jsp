@@ -116,7 +116,7 @@
         <div class="side-body">
             <div id="main-page">
                 <%-- 초기페이지는 login --%>
-                <iframe name="content" src="/login" height="100%" width="100%" border="0" frameborder="0" scrolling="auto"></iframe>
+                <iframe name="content" src="/login" height="100%" width="100%" border="0" frameborder="0" scrolling="no"></iframe>
             </div>
         </div>
     </div>
