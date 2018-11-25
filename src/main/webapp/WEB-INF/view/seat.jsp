@@ -66,7 +66,6 @@
             <label for="content" class="control-label">Message:</label>
             <textarea id="content" class="form-control" maxlength="300"></textarea>
             <div id="content_length" align="right">0/300</div>
-            <textarea id="content" class="form-control"></textarea>
             <hr>
             <% for(int i=0;i<boardDtoList.size();i++){ %>
             <p><%= boardDtoList.get(i).getContent() %>
