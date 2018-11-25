@@ -5,6 +5,7 @@ public class BoardDto {
     private int s_idx;
     private String content;
     private int m_idx;
+    private String userId;
     private int b_idx;
 
     public int getS_idx() {  return s_idx;   }
@@ -18,6 +19,10 @@ public class BoardDto {
     public int getM_idx() {   return m_idx;   }
 
     public void setM_idx(int m_idx) { this.m_idx = m_idx;  }
+
+    public String getUserId() {return userId;}
+
+    public void setUserId(String userId) {this.userId = userId;}
 
     public int getB_idx() {  return b_idx; }
 

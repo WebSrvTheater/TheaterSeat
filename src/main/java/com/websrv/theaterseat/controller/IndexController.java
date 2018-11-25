@@ -1,6 +1,8 @@
 package com.websrv.theaterseat.controller;
 
+import com.websrv.theaterseat.dto.BoardDto;
 import com.websrv.theaterseat.dto.SeatDto;
+import com.websrv.theaterseat.mapper.BoardMapper;
 import com.websrv.theaterseat.mapper.SeatMapper;
 import com.websrv.theaterseat.mapper.TheaterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class IndexController {
 
     @Autowired
     SeatMapper seatMapper;
+
+    @Autowired
+    BoardMapper boardMapper;
 
     @RequestMapping("/")
     public String index(Model model) throws Exception {
@@ -98,7 +103,10 @@ public class IndexController {
     //각각의 좌석 게시판 매핑
     @GetMapping("/seat/{s_idx}")
     public String seat(Model model, @PathVariable String s_idx) throws Exception {
-        model.addAttribute("s_idx", s_idx);
+        List<BoardDto> boardDtoList = boardMapper.selectAllBoard(s_idx);
+        model.addAttribute("s_idx",s_idx);
+        model.addAttribute("boardDtoList",boardDtoList);
+
         return "seat";
     }
 

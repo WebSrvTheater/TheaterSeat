@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="java.util.*"%>
+<%@ page import ="com.websrv.theaterseat.dto.BoardDto"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!-- jQuery -->
@@ -8,6 +9,7 @@
 <head>
 <%
     String s_idx = (String) request.getAttribute("s_idx");
+    List<BoardDto> boardDtoList = (List<BoardDto>) request.getAttribute("boardDtoList");
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -64,6 +66,11 @@
             <label for="content" class="control-label">Message:</label>
             <textarea id="content" class="form-control" maxlength="300"></textarea>
             <div id="content_length" align="right">0/300</div>
+            <textarea id="content" class="form-control"></textarea>
+            <hr>
+            <% for(int i=0;i<boardDtoList.size();i++){ %>
+            <p><%= boardDtoList.get(i).getContent() %>
+             <%   } %>
         </div>
       </div>
       <div class="modal-footer">

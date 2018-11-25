@@ -9,4 +9,7 @@
         insert into board(content, m_idx, s_idx) values(#{content},#{m_idx},#{s_idx})
     </insert>
 
+    <select id="selectAllBoard" parameterType="String" resultType="com.websrv.theaterseat.dto.BoardDto">
+        select member.userId, board.content from member, board where member.m_idx=board.m_idx and board.s_idx=#{s_idx}
+    </select>
 </mapper>
