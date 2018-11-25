@@ -6,32 +6,49 @@
 <!-- jQuery -->
 <script src="http://code.jquery.com/jquery-1.12.0.js"></script>
 <head>
+<%
+    String s_idx = (String) request.getAttribute("s_idx");
+%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script>
     $(document).ready(function(){
       $("#btnSave").click(function(){
+      var content = $('#content').val();
+      var s_idx = <%= s_idx %>;
+      var m_idx = <%= session.getAttribute("m_idx") %>;
         $.ajax({
-            type: "post",
-            url: "/board/writing",
-            contentType: "application/json;charset=utf-8",
-        })
-      })
-    })
+                type: "post",
+                url: "/board/writing",
+                contentType: "application/json;charset=utf-8",
+                datatype: "json",
+                data: JSON.stringify({"content":content,"m_idx": m_idx, "s_idx":s_idx}),
+                success: function(response) {
+                    if(response.code == '200'){
+                        alert(response.message);
+                        location.reload();
+                    }
+                    else {
+                        alert(response.message);
+                    }
+                },
+                error: function() {
+                    alert(data);
+                }
+        });
+      });
+    });
 </script>
 </head>
 <body>
-<%
-    String s_idx = (String) request.getAttribute("s_idx");
-%>
 <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title"><%=s_idx%></h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
-            <label for="message-text" class="control-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <label for="content" class="control-label">Message:</label>
+            <textarea id="content" class="form-control"></textarea>
         </div>
       </div>
       <div class="modal-footer">

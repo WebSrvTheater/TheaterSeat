@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface BoardMapper {
 
-    public List<BoardDto> insertBoard(BoardDto boardDto);
+    public void insertBoard(BoardDto boardDto);
 
 }
