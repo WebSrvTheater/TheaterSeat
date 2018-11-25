@@ -6,6 +6,7 @@
 <html>
 <!-- jQuery -->
 <script src="http://code.jquery.com/jquery-1.12.0.js"></script>
+<script src="/resources/js/sha256.js"></script>
 <!-- Bootstrap -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -29,9 +30,9 @@
             }
         }
         //패스워드 유효성 검사
-    	var passck1 = $('#userPw').val();
-    	var passck2 = $('#passwdck').val();
-    	if(passck1 != passck2){
+    	var userPw = $('#userPw').val();
+    	var passck = $('#passwdck').val();
+    	if(userPw != passck){
     		alert("입력하신 두 비밀번호가 일치하지 않습니다.");
     		return false;
     	}
@@ -42,7 +43,7 @@
                   url: "/member/signup",
                   contentType : "application/json;charset=utf8",
                   datatype : "json",
-                  data: JSON.stringify({"userId": $('#userId').val(), "userPw": $('#userPw').val()}),
+                  data: JSON.stringify({"userId": userId, "userPw": SHA256(userPw)}),
                   success: function(response) {
                 	  if(response.code == '200') {
       					alert(response.message);

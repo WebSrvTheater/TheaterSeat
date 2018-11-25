@@ -27,7 +27,7 @@ public class MemberService {
                 memberMapper.insertMember(memberDto);
                 return new ResultView("200","회원가입을 완료하였습니다.");
             } else return new ResultView("501", "이미 존재하는 아이디입니다.");
-        } catch(Exception e){return new ResultView("500","Internel Server Error");}
+        } catch(Exception e){System.out.println(memberDto.getUserPw());e.printStackTrace(); return new ResultView("500","Internel Server Error");}
     }
 
     public ResultView chkMember(HttpSession session, MemberDto memberDto){
