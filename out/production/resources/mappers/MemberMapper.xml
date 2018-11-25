@@ -13,8 +13,8 @@
         select count(userId) from member where userId=#{userId}
     </select>
 
-    <select id="loginCheck" resultType="boolean">
-        select count(*) from member where userId=#{userId} and userPw=#{userPw};
+    <select id="loginCheck" resultType="com.websrv.theaterseat.dto.MemberDto">
+        select * from member where userId=#{userId} and userPw=#{userPw};
     </select>
 
     <insert id="insertMember" parameterType="com.websrv.theaterseat.dto.MemberDto">

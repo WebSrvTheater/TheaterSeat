@@ -8,6 +8,7 @@
 </head>
 <body>
     <%
+        out.print(session.getAttribute("m_idx"));
         out.print(session.getAttribute("id"));
     %>
 </body>
