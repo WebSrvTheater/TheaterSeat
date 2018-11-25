@@ -13,8 +13,22 @@
 <title>Insert title here</title>
 <script>
     $(document).ready(function(){
+      $("#content").keyup(function(){
+        var content_length = $("#content").val().length;
+        if(content_length>300)
+            $("#content_length").text("300/300");
+        else
+            $("#content_length").text(content_length + "/300");
+      });
       $("#btnSave").click(function(){
       var content = $('#content').val();
+      if(content.length == 0){
+        alert("내용을 입력해주세요.");
+        return false;
+      } else if(content.length > 300) {
+        alert("300자 이하로 작성해주세요.");
+        return false;
+      }
       var s_idx = <%= s_idx %>;
       var m_idx = <%= session.getAttribute("m_idx") %>;
         $.ajax({
@@ -48,7 +62,8 @@
       <div class="modal-body">
         <div class="form-group">
             <label for="content" class="control-label">Message:</label>
-            <textarea id="content" class="form-control"></textarea>
+            <textarea id="content" class="form-control" maxlength="300"></textarea>
+            <div id="content_length" align="right">0/300</div>
         </div>
       </div>
       <div class="modal-footer">
