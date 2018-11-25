@@ -8,4 +8,6 @@ public interface BoardMapper {
 
     public void insertBoard(BoardDto boardDto);
 
+    public List<BoardDto> selectAllBoard(String s_idx) throws Exception;
+
 }
