@@ -5,6 +5,7 @@
 <html>
 <!-- jQuery -->
 <script src="http://code.jquery.com/jquery-1.12.0.js"></script>
+<script src="resources/js/sha256.js"></script>
 <!-- Bootstrap -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -18,12 +19,14 @@
     <%-- /member/login으로 post 메소드를 통해 아이디, 패스워드 전송. MemberController에서 처리. --%>
     $(document).ready(function() {
       $('#btnSignin').click(function() {
+      var userId = $('#userId').val();
+      var userPw = $('#userPw').val();
         $.ajax({
                   type: "post",
                   url: "/member/login",
                   contentType : "application/json;charset=utf8",
                   datatype : "json",
-                  data: JSON.stringify({"userId": $('#userId').val(), "userPw": $('#userPw').val()}),
+                  data: JSON.stringify({"userId": userId, "userPw": SHA256(userPw)}),
                   success: function(response) {
                 	  if(response.code == '200') {
       					alert(response.message);
@@ -45,7 +48,7 @@
 <head>
 <title>SignUp</title>
 </head>
-<body style>
+<body style="background-color:#333333; color:white">
 	<div class="row" id="main" style="padding-top: 100px;">
 		<div class="col-md-2 col-md-offset-5">
 			<h2 class="text-center">Login</h2>
