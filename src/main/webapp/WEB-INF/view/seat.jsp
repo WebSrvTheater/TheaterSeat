@@ -26,7 +26,7 @@
                 success: function(response) {
                     if(response.code == '200'){
                         alert(response.message);
-                        location.reload();
+                        $('.modal-body').html($('.modal-body').html());
                     }
                     else {
                         alert(response.message);
