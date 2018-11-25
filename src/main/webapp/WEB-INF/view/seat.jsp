@@ -15,7 +15,7 @@
     $(document).ready(function(){
       $("#content").keyup(function(){
         var content_length = $("#content").val().length;
-        if(content_length>300)
+        if(content_length > 300)
             $("#content_length").text("300/300");
         else
             $("#content_length").text(content_length + "/300");
@@ -67,7 +67,6 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" id ="btnSave" class="btn btn-primary">Save message</button>
 </body>
 </html>
