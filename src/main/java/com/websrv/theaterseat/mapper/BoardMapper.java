@@ -11,6 +11,6 @@ public interface BoardMapper {
 
     public List<BoardDto> selectAllBoard(String s_idx) throws Exception;
 
-    public boolean isContentExist(@Param("s_idx") int s_idx, @Param("m_idx") String m_idx);
+    public void deleteBoard(int b_idx);
 
 }

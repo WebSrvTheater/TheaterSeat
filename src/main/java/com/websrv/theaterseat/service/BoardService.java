@@ -25,17 +25,10 @@ public class BoardService {
         }catch(Exception e){e.printStackTrace();return new ResultView("500", "Internal Server Error");}
     }
 
-    public ResultView selectAllBoard(HttpSession session, BoardDto boardDto){
+    public ResultView deleteContent(int b_idx){
         try{
-            if(session.getAttribute("m_idx") != null) {
-                boardMapper.selectAllBoard("s_idx");
-                return new ResultView("200", "정상 작업 완료");
-            }else{
-                return new ResultView("401", "로그인이 필요합니다.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResultView("500", "Internal Server Error");
-        }
+            boardMapper.deleteBoard(b_idx);
+            return new ResultView("200", "삭제되었습니다.");
+        }catch(Exception e){e.printStackTrace();return new ResultView("500","Internal Server Error");}
     }
 }

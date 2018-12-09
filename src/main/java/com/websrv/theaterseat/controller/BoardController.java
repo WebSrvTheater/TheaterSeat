@@ -6,10 +6,7 @@ import com.websrv.theaterseat.service.BoardService;
 import com.websrv.theaterseat.view.ResultView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,13 +28,12 @@ public class BoardController {
     }
 
     @ResponseBody
-    @PostMapping(value = "/reading", produces = "application/json")
-    public ResultView selectAllBoard(HttpSession session, @RequestBody BoardDto boardDto) {
+    @DeleteMapping(value = "/delete", produces = "application/json")
+    public ResultView deleteContent(@RequestParam int b_idx){
         try{
-            return boardService.selectAllBoard(session, boardDto);
-        }catch(Exception e){
+            return boardService.deleteContent(b_idx);
+        }catch (Exception e){
             throw e;
         }
     }
-
 }

@@ -62,17 +62,23 @@
         <h4 class="modal-title"><%=s_idx%></h4>
       </div>
       <div class="modal-body">
+      <% if(session.getAttribute("m_idx")!=null){ %>
         <div class="form-group">
             <label for="content" class="control-label">Message:</label>
             <textarea id="content" class="form-control" maxlength="300"></textarea>
-            <div id="content_length" align="right">0/300</div>
+            <div>
+                <span id="content_length" align="left">0/300</span>
+                <span style="text-align:right"><button type="button" id ="btnSave" class="btn btn-primary">Save message</button></span>
+            </div>
             <hr>
+      <%  }  %>
             <% for(int i=0;i<boardDtoList.size();i++){ %>
             <p><%= boardDtoList.get(i).getContent() %>
-             <%   } %>
+                <% if(Integer.parseInt((String) session.getAttribute("m_idx"))==boardDtoList.get(i).getM_idx()) { %>
+                    <span style="align:right"><button type="button" id ="btnDelete" class="btn btn-primary">Delete</button></span>
+                <%   } %>
+            <%   } %>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" id ="btnSave" class="btn btn-primary">Save message</button>
 </body>
 </html>
