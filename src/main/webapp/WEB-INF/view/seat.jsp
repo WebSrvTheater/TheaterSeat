@@ -53,6 +53,9 @@
                 }
         });
       });
+      $("button[id^='btnDelete']").click(function(){
+        var b_idx = $(this).val();
+      });
     });
 </script>
 </head>
@@ -66,16 +69,14 @@
         <div class="form-group">
             <label for="content" class="control-label">Message:</label>
             <textarea id="content" class="form-control" maxlength="300"></textarea>
-            <div>
                 <span id="content_length" align="left">0/300</span>
                 <span style="text-align:right"><button type="button" id ="btnSave" class="btn btn-primary">Save message</button></span>
-            </div>
             <hr>
       <%  }  %>
             <% for(int i=0;i<boardDtoList.size();i++){ %>
             <p><%= boardDtoList.get(i).getContent() %>
                 <% if(Integer.parseInt((String) session.getAttribute("m_idx"))==boardDtoList.get(i).getM_idx()) { %>
-                    <span style="align:right"><button type="button" id ="btnDelete" class="btn btn-primary">Delete</button></span>
+                    <span id="btnDelete" style="align:right"><button type="button" id="btnDelete<%= boardDtoList.get(i).getB_idx() %>" class="btn btn-primary" value="<%= boardDtoList.get(i).getB_idx() %>">Delete</button></span>
                 <%   } %>
             <%   } %>
         </div>
