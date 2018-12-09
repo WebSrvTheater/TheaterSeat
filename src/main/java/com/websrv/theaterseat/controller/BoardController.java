@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/board")
@@ -29,8 +30,9 @@ public class BoardController {
 
     @ResponseBody
     @DeleteMapping(value = "/delete", produces = "application/json")
-    public ResultView deleteContent(@RequestParam int b_idx){
+    public ResultView deleteContent(@RequestBody Map<String, String> bMap){
         try{
+            String b_idx = bMap.get("b_idx");
             return boardService.deleteContent(b_idx);
         }catch (Exception e){
             throw e;

@@ -55,6 +55,19 @@
       });
       $("button[id^='btnDelete']").click(function(){
         var b_idx = $(this).val();
+            $.ajax({
+                    type: "delete",
+                    url: "/board/delete",
+                    contentType: "application/json;charset=utf-8",
+                    datatype:"json",
+                    data: JSON.stringify({"b_idx": b_idx}),
+                    success: function(data) {
+                        alert(data.code);
+                    },
+                    error: function(data) {
+                        alert(data);
+                    }
+            })
       });
     });
 </script>

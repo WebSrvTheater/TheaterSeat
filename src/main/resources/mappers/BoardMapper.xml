@@ -17,8 +17,8 @@
         select count(board.content) from member, board where member.m_idx=board.m_idx and board.m_idx=${m_idx} and board.s_idx=#{s_idx}
     </select>
 
-    <delete id="deleteBoard" parameterType="int">
-        delete from board where b_idx=${b_idx}
+    <delete id="deleteBoard" parameterType="String">
+        delete from board where b_idx=#{b_idx}
     </delete>
 
 </mapper>

@@ -25,8 +25,9 @@ public class BoardService {
         }catch(Exception e){e.printStackTrace();return new ResultView("500", "Internal Server Error");}
     }
 
-    public ResultView deleteContent(int b_idx){
+    public ResultView deleteContent(String b_idx){
         try{
+            System.out.println(b_idx);
             boardMapper.deleteBoard(b_idx);
             return new ResultView("200", "삭제되었습니다.");
         }catch(Exception e){e.printStackTrace();return new ResultView("500","Internal Server Error");}

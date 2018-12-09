@@ -11,6 +11,6 @@ public interface BoardMapper {
 
     public List<BoardDto> selectAllBoard(String s_idx) throws Exception;
 
-    public void deleteBoard(int b_idx);
+    public void deleteBoard(String b_idx);
 
 }
