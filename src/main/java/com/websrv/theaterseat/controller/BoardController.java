@@ -22,10 +22,20 @@ public class BoardController {
 
     @ResponseBody
     @PostMapping(value = "/writing", produces = "application/json")
-    public ResultView createWriting(HttpSession session, @RequestBody BoardDto boardDto) {
+    public ResultView createContent(HttpSession session, @RequestBody BoardDto boardDto) {
         try{
-            return boardService.createWriting(session, boardDto);
+            return boardService.createContent(session, boardDto);
         }catch (Exception e){
+            throw e;
+        }
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/reading", produces = "application/json")
+    public ResultView selectAllBoard(HttpSession session, @RequestBody BoardDto boardDto) {
+        try{
+            return boardService.selectAllBoard(session, boardDto);
+        }catch(Exception e){
             throw e;
         }
     }

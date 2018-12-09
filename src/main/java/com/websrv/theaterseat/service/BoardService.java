@@ -14,7 +14,7 @@ public class BoardService {
     @Autowired
     private BoardMapper boardMapper;
 
-    public ResultView createWriting(HttpSession session, BoardDto boardDto){
+    public ResultView createContent(HttpSession session, BoardDto boardDto){
         try{
             if(session.getAttribute("m_idx") != null){
                 boardMapper.insertBoard(boardDto);
@@ -23,5 +23,19 @@ public class BoardService {
                 return new ResultView("401", "로그인이 필요합니다.");
             }
         }catch(Exception e){e.printStackTrace();return new ResultView("500", "Internal Server Error");}
+    }
+
+    public ResultView selectAllBoard(HttpSession session, BoardDto boardDto){
+        try{
+            if(session.getAttribute("m_idx") != null) {
+                boardMapper.selectAllBoard("s_idx");
+                return new ResultView("200", "정상 작업 완료");
+            }else{
+                return new ResultView("401", "로그인이 필요합니다.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultView("500", "Internal Server Error");
+        }
     }
 }

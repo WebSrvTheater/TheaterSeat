@@ -12,4 +12,8 @@
     <select id="selectAllBoard" parameterType="String" resultType="com.websrv.theaterseat.dto.BoardDto">
         select member.userId, board.content from member, board where member.m_idx=board.m_idx and board.s_idx=#{s_idx}
     </select>
+
+    <select id="isContentExist" parameterType="map" resultType="boolean">
+        select count(board.content) from member, board where member.m_idx=board.m_idx and board.m_idx=${m_idx} and board.s_idx=#{s_idx}
+    </select>
 </mapper>
