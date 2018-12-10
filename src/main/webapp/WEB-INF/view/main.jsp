@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ page import ="java.util.*"%>
-<%@ page import ="com.websrv.theaterseat.mapper.SeatMapper"%>
+<%@ page import ="com.websrv.theaterseat.mapper.RoomMapper"%>
 <!-- @author : heedong111 -->
 <html>
 <head>
@@ -57,7 +57,7 @@
             <% if(session.getAttribute("id")==null){ %>
             <li><a href="/login" target="content"><span class="glyphicon glyphicon-user"></span> 로그인
             <% } else { %>
-            <li><a href="/logout" target="content" id="logout"><span class="glyphicon glyphicon-user"></span> 로그아웃 <% } %></a></li>
+            <li><a href="/logout" target="content" id="logout"><span class="glyphicon glyphicon-off"></span> 로그아웃 <% } %></a></li>
 
             <!-- 드롭다운 시작 -->
             <li class="panel panel-default" id="dropdown">
@@ -69,7 +69,7 @@
                 <% List<String> theaterNameList = (List<String>) request.getAttribute("theaterNameList");
                    Map<String, List<String>> theaterMap = (Map<String, List<String>>) request.getAttribute("theaterMap");
                    Map<String, String> roomMap = (Map<String,String>) request.getAttribute("roomMap");
-                   SeatMapper seatMapper = (SeatMapper) request.getAttribute("seatMapper"); %>
+                   RoomMapper roomMapper = (RoomMapper) request.getAttribute("roomMapper"); %>
                 <div id="dropdown-lvl1" class="panel-collapse collapse">
                 <%-- 영화관 수 만큼 드롭다운 생성 --%>
                 <% for(int i=0;i<theaterMap.size();i++){
@@ -88,7 +88,7 @@
                                             <%-- 상영관 수 만큼 드롭다운 생성 --%>
                                             <% for(int j=0;j<theaterMap.get(theaterName).size();j++) { %>
                                                 <% String r_idx = theaterMap.get(theaterName).get(j); %>
-                                                <% if(seatMapper.selectAllSeats(r_idx).size() > 0) { %>             <%-- DB에 좌석 정보가 있는 상영관만 출력 --%>
+                                                <% if(roomMapper.selectAllSeats(r_idx).size() > 0) { %>             <%-- DB에 좌석 정보가 있는 상영관만 출력 --%>
                                                 <li class="roomlist">
                                                     <%-- 클릭시 r_idx에 해당하는 상영관 정보를 메인페이지에 전시 --%>
                                                     <a href="/room/<%=r_idx%>" class="seat" target="content"><%= roomMap.get(r_idx) %></a>

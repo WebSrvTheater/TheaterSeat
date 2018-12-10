@@ -10,7 +10,7 @@
     </insert>
 
     <select id="selectAllBoard" parameterType="String" resultType="com.websrv.theaterseat.dto.BoardDto">
-        select * from member, board where member.m_idx=board.m_idx and board.s_idx=#{s_idx}
+        select * from member, board where member.m_idx=board.m_idx and board.s_idx=#{s_idx} order by b_idx desc
     </select>
 
     <select id="isContentExist" parameterType="map" resultType="boolean">

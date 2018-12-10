@@ -14,7 +14,7 @@ public class SeatDto {
         this.s_idx = s_idx;
     }
 
-    public int getSeatRow() {
+    public char getSeatRow() {
         return seatRow;
     }
 
