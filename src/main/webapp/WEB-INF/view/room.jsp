@@ -59,19 +59,7 @@ caption {
     boolean disabled=false;
     boolean sweetbox=false;
 %>
-<!-- 모달창 -->
-<%-- 모달창은 for문을 돌려 이 상영관의 좌석 수 만큼 만든다. 클릭하지 않으면 보이지 않음. --%>
-<%-- modal fade 클래스의 id로 각각의 좌석 구분 --%>
-<% for(int i=0;i<seatDto.size();i++){ %>
-<div class="modal fade" id="myModal<%=i%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <%-- seat.jsp 에서 표시될 부분 --%>
-    </div>
-  </div>
-</div>
 
-<% } %>
 <div class="row" align="center" style="padding-top:40px">
     <h1 style="font-family: 'Black Han Sans', sans-serif; color:white;"><%=theaterName%> <%=roomName%></h1>
     <hr>
