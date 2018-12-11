@@ -85,26 +85,54 @@
             });
             $("button[id^='btnDelete']").click(function () {
                 var b_idx = $(this).val();
-                $.ajax({
-                    type: "delete",
-                    url: "/board/delete",
-                    contentType: "application/json;charset=utf-8",
-                    datatype: "json",
-                    data: JSON.stringify({ "b_idx": b_idx }),
-                    success: function (data) {
-                        alert("삭제되었습니다.");
-                        window.location.reload();
-                    },
-                    error: function (data) {
-                        alert(data);
+                var content = $('#content'+b_idx+' .inner').text();
+                if(click==0){
+                    var result = confirm("정말로 삭제하시겠습니까?");
+                    if(result){
+                        $.ajax({
+                            type: "delete",
+                            url: "/board/delete",
+                            contentType: "application/json;charset=utf-8",
+                            datatype: "json",
+                            data: JSON.stringify({ "b_idx": b_idx }),
+                            success: function (data) {
+                                alert("삭제되었습니다.");
+                                window.location.reload();
+                            },
+                            error: function (data) {
+                                alert(data);
+                            }
+                        });
                     }
-                })
+                }
+                else {
+                    $('#content'+b_idx+' .inner').replaceWith('<span class="inner" style="width:900px">'+content+'</span>');
+                    $(this).text('\u2169');
+                    $('#btnUpdate'+b_idx).text('\u270E');
+                    $('#contentHR'+b_idx).css("padding-top","");
+                    click--;
+                }
             });
             $('.starRev span').click(function () {
                 $(this).parent().children('span').removeClass('on');
                 $(this).addClass('on').prevAll('span').addClass('on');
                 rate = $(this).text();
                 return false;
+            });
+            var click=0;
+            $("button[id^='btnUpdate']").click(function(){
+                var b_idx = $(this).val();
+                if(click==0){
+                    var content = $('#content'+b_idx+' .inner').text();
+                    $('#content'+b_idx+' .inner').replaceWith("<span class='inner'><textarea width='900px' style='margin-bottom:10px' class='form-control' maxlength='300'>"+content+"</textarea></span>");
+                    $(this).append('수정');
+                    $('#btnDelete'+b_idx).append('취소');
+                    $('#contentHR'+b_idx).css("padding-top","15px");
+                    click++;
+                }
+                else{
+                    alert(b_idx);
+                }
             });
         });
     </script>
@@ -157,21 +185,34 @@
         <hr style="border:none; border:1px dotted #EEEEEE">
         <% } %>
         <% for(int i=0;i<boardDtoList.size();i++){ %>
-        <p>
-            <%= boardDtoList.get(i).getContent() %>
-            <% if(session.getAttribute("m_idx") != null) { %>
-                <% if(Integer.parseInt((String) session.getAttribute("m_idx"))==boardDtoList.get(i).getM_idx()) { %>
-                    <span class="btnDelete" style="float:right; padding:1px;">
-                    <button type="button" id="btnDelete<%= boardDtoList.get(i).getB_idx() %>"
-                        class="btn btn-xs" value="<%= boardDtoList.get(i).getB_idx() %>" style="border:1px solid #AAAAAA; background-color:white;">
-                        &#8569;</button></span>
-                     <span class="btnUpdate" style="float:right; padding:1px;">
-                     <button type="button" id="btnUpdate<%= boardDtoList.get(i).getB_idx() %>"
-                        class="btn btn-xs" value="<%= boardDtoList.get(i).getB_idx() %>" style="border:1px solid #AAAAAA; background-color:white;">
-                      	&#9998;</button></span>
+            <% int b_idx = boardDtoList.get(i).getB_idx(); %>
+            <% String content = boardDtoList.get(i).getContent(); %>
+            <div id="review<%= b_idx %>">
+                <span id="content<%= b_idx %>">
+                    <span class="inner" style="width:900px"><%= content %></span>
+                </span>
+                <span id="button<%= b_idx %>">
+                <% if(session.getAttribute("m_idx") != null) { %>
+                    <% if(Integer.parseInt((String) session.getAttribute("m_idx"))==boardDtoList.get(i).getM_idx()) { %>
+                        <span class="btnDelete" style="float:right; padding:1px;">
+                            <button type="button" id="btnDelete<%= b_idx %>"
+                            class="btn btn-xs" value="<%= b_idx %>" style="border:1px solid #AAAAAA; background-color:white;">
+                            &#8569;
+                            </button>
+                        </span>
+                        <span class="btnUpdate" style="float:right; padding:1px;">
+                            <button type="button" id="btnUpdate<%= b_idx %>"
+                            class="btn btn-xs" value="<%= b_idx %>" style="border:1px solid #AAAAAA; background-color:white;">
+                      	    &#9998;
+                      	    </button>
+                      	</span>
+                    <% } %>
                 <% } %>
-            <% } %>
-            <hr style="border:none; border:1px dotted #EEEEEE">
+                </span>
+                <div id="contentHR<%=b_idx%>">
+                    <hr style="border:none; border:1px dotted #EEEEEE">
+                </div>
+            </div>
          <% } %>
     </div>
 </body>
