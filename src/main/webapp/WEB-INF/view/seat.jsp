@@ -6,10 +6,6 @@
 <html>
 <!-- jQuery -->
 <script src="http://code.jquery.com/jquery-1.12.0.js"></script>
-
-<link rel="stylesheet" href="/resources/css/bootstrap.css">
-<link rel="stylesheet" href="/resources/css/bootstrap-theme.css">
-<link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <style>
     .starR1{
@@ -34,6 +30,8 @@
 .starR2.on{background-position:-10px 0;}
 </style>
 
+<link rel="stylesheet" href="/resources/css/bootstrap.css">
+<link rel="stylesheet" href="/resources/css/bootstrap-theme.css">
 <head>
     <%
     String s_idx = (String) request.getAttribute("s_idx");
@@ -163,15 +161,19 @@
             <%= boardDtoList.get(i).getContent() %>
             <% if(session.getAttribute("m_idx") != null) { %>
                 <% if(Integer.parseInt((String) session.getAttribute("m_idx"))==boardDtoList.get(i).getM_idx()) { %>
-                    <span id="btnDelete" style="float:right">
+                    <span class="btnDelete" style="float:right; padding:1px;">
                     <button type="button" id="btnDelete<%= boardDtoList.get(i).getB_idx() %>"
-                        class="btn btn-xs" value="<%= boardDtoList.get(i).getB_idx() %>">
-                    ×</button></span>
+                        class="btn btn-xs" value="<%= boardDtoList.get(i).getB_idx() %>" style="border:1px solid #AAAAAA; background-color:white;">
+                        &#8569;</button></span>
+                     <span class="btnUpdate" style="float:right; padding:1px;">
+                     <button type="button" id="btnUpdate<%= boardDtoList.get(i).getB_idx() %>"
+                        class="btn btn-xs" value="<%= boardDtoList.get(i).getB_idx() %>" style="border:1px solid #AAAAAA; background-color:white;">
+                      	&#9998;</button></span>
                 <% } %>
             <% } %>
             <hr style="border:none; border:1px dotted #EEEEEE">
          <% } %>
     </div>
 </body>
-
+<link href="http://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet">
 </html>

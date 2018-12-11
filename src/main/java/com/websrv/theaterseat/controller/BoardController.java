@@ -38,4 +38,14 @@ public class BoardController {
             throw e;
         }
     }
+
+    @ResponseBody
+    @PutMapping(value = "/update", produces = "application/json")
+    public ResultView deleteContent(@RequestBody BoardDto boardDto){
+        try{
+            return new ResultView("0","0");
+        }catch(Exception e){
+            throw e;
+        }
+    }
 }

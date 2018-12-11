@@ -17,6 +17,10 @@
         select count(board.content) from member, board where member.m_idx=board.m_idx and board.m_idx=${m_idx} and board.s_idx=#{s_idx}
     </select>
 
+    <update id="updateBoardd" parameterType="String">
+        update board set content=#{content} where b_idx=#{b_idx}
+    </update>
+
     <delete id="deleteBoard" parameterType="String">
         delete from board where b_idx=#{b_idx}
     </delete>
