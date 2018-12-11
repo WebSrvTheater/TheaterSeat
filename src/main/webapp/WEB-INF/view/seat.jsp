@@ -126,9 +126,8 @@
         <div class="form-group">
         <hr style="border:none; border:1px solid #AAAAAA">
         <h3 style="font-family: 'hanna', serif; padding-left:5px; margin-top:5px">리뷰작성</h3>
-        <hr style="border:none; border:1px solid #AAAAAA">
         <% if(session.getAttribute("m_idx")!=null){ %>
-            <span style="float:left"><label for="content" class="control-label">별점 : </label></span>
+            <span style="float:left; padding-left:5px"><label for="content" class="control-label">별점 : </label></span>
             <span class="starRev">
                 <span class="starR1 on">0.5</span>
                 <span class="starR2 on">1</span>
@@ -141,19 +140,19 @@
                 <span class="starR1 on">4.5</span>
                 <span class="starR2 on">5</span>
             </span>
-            <textarea id="content" class="form-control" maxlength="300"></textarea>
-            <div style="padding-top:5px;>
+            <textarea id="content" class="form-control" maxlength="300" style="padding-top:5px; padding-bottom:5px;"></textarea>
+            <div style="padding-top:5px;">
                 <span id="content_length" style="float: left">0/300</span>
                 <span style="float:right"><button type="button" id="btnSave" class="btn btn-default btn-sm">저장</button></span>
             </div>
         <%  } else {  %>
-        <center style="margin-bottom:20px">로그인 후 리뷰를 작성해주세요!</center>
+        <center style="margin-top:20px; margin-bottom:20px">로그인 후 리뷰를 작성해주세요!</center>
         <% } %>
         </div>
-        <div id="hr" style="padding-top:1px">
-            <hr style="border:none; border:1px solid #AAAAAA">
+        <div id="hr" style="padding-top:1px;">
+            <hr style="border:none; border:1px solid #AAAAAA; margin-top:20px; margin-bottom:10px">
             <h4 style="font-family: 'hanna', serif; padding-left:5px">리뷰</h4>
-            <hr style="border:none; border:1px solid #AAAAAA">
+            <hr style="border:none; border:1px solid #AAAAAA; margin-top:10px; margin-bottom:20px">
         </div>
         <% if(boardDtoList.size() == 0) { %>
         <center>아직 리뷰가 없습니다.<br>이 자리의 첫 번째 리뷰어가 되어주세요!</center>
@@ -164,8 +163,9 @@
             <%= boardDtoList.get(i).getContent() %>
             <% if(session.getAttribute("m_idx") != null) { %>
                 <% if(Integer.parseInt((String) session.getAttribute("m_idx"))==boardDtoList.get(i).getM_idx()) { %>
-                    <span id="btnDelete" style="float:right"><button type="button" id="btnDelete<%= boardDtoList.get(i).getB_idx() %>"
-                        class="btn btn-default btn-xs" value="<%= boardDtoList.get(i).getB_idx() %>">
+                    <span id="btnDelete" style="float:right">
+                    <button type="button" id="btnDelete<%= boardDtoList.get(i).getB_idx() %>"
+                        class="btn btn-xs" value="<%= boardDtoList.get(i).getB_idx() %>">
                     ×</button></span>
                 <% } %>
             <% } %>
