@@ -39,6 +39,7 @@
     String roomName = (String) request.getAttribute("roomName");
     char seatRow = (char) request.getAttribute("seatRow");
     int seatNum = (int) request.getAttribute("seatNum");
+    String ratingAvg = (String) request.getAttribute("ratingAvg");
 %>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
@@ -146,6 +147,9 @@
             <%=seatRow%>열
             <%=seatNum%>번
         </h2>
+        <h3 style="font-family: 'hanna', serif;">
+            별점 평점 : <%= ratingAvg %>
+        </h3>
         </center>
     </div>
     <div id="seat-body">
@@ -187,9 +191,11 @@
         <% for(int i=0;i<boardDtoList.size();i++){ %>
             <% int b_idx = boardDtoList.get(i).getB_idx(); %>
             <% String content = boardDtoList.get(i).getContent(); %>
+            <% Double rating = boardDtoList.get(i).getRating(); %>
             <div id="review<%= b_idx %>">
                 <span id="content<%= b_idx %>">
                     <span class="inner" style="width:900px"><%= content %></span>
+                    <span><%= rating %></span>
                 </span>
                 <span id="button<%= b_idx %>">
                 <% if(session.getAttribute("m_idx") != null) { %>

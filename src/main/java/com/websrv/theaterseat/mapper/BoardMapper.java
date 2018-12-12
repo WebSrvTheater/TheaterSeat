@@ -15,4 +15,6 @@ public interface BoardMapper {
 
     public void updateBoard(String b_idx);
 
+    public String selectRatingAvg(String s_idx);
+
 }
