@@ -106,7 +106,7 @@ public class IndexController {
         model.addAttribute("roomName",roomMapper.selectRoomNameByS_Idx(s_idx));
         model.addAttribute("seatRow",roomMapper.selectSeat(s_idx).getSeatRow());
         model.addAttribute("seatNum",roomMapper.selectSeat(s_idx).getSeatNum());
-
+        model.addAttribute("ratingAvg",boardMapper.selectRatingAvg(s_idx));
         return "seat";
     }
 

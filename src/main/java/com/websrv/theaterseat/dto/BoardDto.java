@@ -7,6 +7,7 @@ public class BoardDto {
     private int m_idx;
     private String userId;
     private int b_idx;
+    private double rating;
 
     public int getS_idx() {  return s_idx;   }
 
@@ -27,4 +28,8 @@ public class BoardDto {
     public int getB_idx() {  return b_idx; }
 
     public void setB_idx(int b_idx) {  this.b_idx = b_idx;  }
+
+    public double getRating() {  return rating;  }
+
+    public void setRating(double rating) {  this.rating = rating;  }
 }

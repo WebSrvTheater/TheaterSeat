@@ -39,12 +39,13 @@
     String roomName = (String) request.getAttribute("roomName");
     char seatRow = (char) request.getAttribute("seatRow");
     int seatNum = (int) request.getAttribute("seatNum");
+    String ratingAvg = (String) request.getAttribute("ratingAvg");
 %>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
     <script>
         $(document).ready(function () {
-            var rate = 5;
+            var rating = 5;
             $("#content").keyup(function () {
                 var content_length = $("#content").val().length;
                 if (content_length > 300)
@@ -68,7 +69,7 @@
                     url: "/board/writing",
                     contentType: "application/json;charset=utf-8",
                     datatype: "json",
-                    data: JSON.stringify({ "content": content, "m_idx": m_idx, "s_idx": s_idx }),
+                    data: JSON.stringify({ "content": content, "m_idx": m_idx, "s_idx": s_idx, "rating": rating }),
                     success: function (response) {
                         if (response.code == '200') {
                             alert(response.message);
@@ -115,7 +116,7 @@
             $('.starRev span').click(function () {
                 $(this).parent().children('span').removeClass('on');
                 $(this).addClass('on').prevAll('span').addClass('on');
-                rate = $(this).text();
+                rating = $(this).text();
                 return false;
             });
             var click=0;
@@ -160,6 +161,9 @@
             <%=seatRow%>열
             <%=seatNum%>번
         </h2>
+        <h3 style="font-family: 'hanna', serif;">
+            별점 평점 : <%= ratingAvg %>
+        </h3>
         </center>
     </div>
     <div id="seat-body">
@@ -201,9 +205,10 @@
         <% for(int i=0;i<boardDtoList.size();i++){ %>
             <% int b_idx = boardDtoList.get(i).getB_idx(); %>
             <% String content = boardDtoList.get(i).getContent(); %>
+            <% Double rating = boardDtoList.get(i).getRating(); %>
             <div id="review<%= b_idx %>" style="padding-left:10px; padding-right:10px">
                 <div id="content<%= b_idx %>" class="row">
-                    <div class="col-sm-2">id가 나올 곳</div>
+                    <div class="col-sm-2"><%= rating %></div>
                     <div class="inner col-sm-8"><%= content %></div>
                     <div class="col-sm-2">
                         <span id="button<%= b_idx %>">

@@ -6,11 +6,15 @@
 <mapper namespace="com.websrv.theaterseat.mapper.BoardMapper">
 
     <insert id="insertBoard" parameterType="com.websrv.theaterseat.dto.BoardDto">
-        insert into board(content, m_idx, s_idx) values(#{content},#{m_idx},#{s_idx})
+        insert into board(content, m_idx, s_idx, rating) values(#{content},#{m_idx},#{s_idx},#{rating})
     </insert>
 
     <select id="selectAllBoard" parameterType="String" resultType="com.websrv.theaterseat.dto.BoardDto">
         select * from member, board where member.m_idx=board.m_idx and board.s_idx=#{s_idx} order by b_idx desc
+    </select>
+
+    <select id="selectRatingAvg" parameterType="String" resultType="String">
+            select round(avg(rating),2) from board where s_idx=#{s_idx} group by s_idx
     </select>
 
     <select id="isContentExist" parameterType="map" resultType="boolean">
