@@ -14,7 +14,7 @@
     </select>
 
     <select id="selectRatingAvg" parameterType="String" resultType="String">
-            select avg(rating) from board where s_idx=#{s_idx} group by s_idx
+            select round(avg(rating),2) from board where s_idx=#{s_idx} group by s_idx
     </select>
 
     <select id="isContentExist" parameterType="map" resultType="boolean">
