@@ -26,7 +26,6 @@
 					data: JSON.stringify({ "userId": userId, "userPw": SHA256(userPw) }),
 					success: function (response) {
 						if (response.code == '200') {
-							alert(response.message);
 							parent.window.location.reload();
 						}
 						else {

@@ -106,10 +106,9 @@
                     }
                 }
                 else {
-                    $('#content'+b_idx+' .inner').replaceWith('<span class="inner" style="width:900px">'+content+'</span>');
+                    $('#content'+b_idx+' .inner').replaceWith('<div class="inner col-sm-8">'+content+'</div>');
                     $(this).text('\u2169');
                     $('#btnUpdate'+b_idx).text('\u270E');
-                    $('#contentHR'+b_idx).css("padding-top","");
                     click--;
                 }
             });
@@ -124,27 +123,29 @@
                 var b_idx = $(this).val();
                 var content = $('#content'+b_idx+' .inner').text();
                 if(click==0){
-                    $('#content'+b_idx+' .inner').replaceWith("<span class='inner'><textarea width='900px' style='margin-bottom:10px' class='form-control' maxlength='300'>"+content+"</textarea></span>");
+                    $('#content'+b_idx+' .inner').replaceWith("<div class='inner col-sm-8'><textarea style='margin-bottom:10px' class='form-control' maxlength='300'>"+content+"</textarea></div>");
                     $(this).append('수정');
                     $('#btnDelete'+b_idx).append('취소');
-                    $('#contentHR'+b_idx).css("padding-top","15px");
                     click++;
                 }
                 else{
-                    $.ajax({
-                        type: "put",
-                        url: "/board/update",
-                        contentType: "application/json;charset=utf-8",
-                        datatype: "json",
-                        data: JSON.stringify({ "content": $('#content'+b_idx+' .inner .form-control').val(), "b_idx": b_idx }),
-                        success: function (data) {
-                            alert("수정되었습니다.");
-                            window.location.reload();
-                        },
-                        error: function (data) {
-                            alert(data);
-                        }
-                   });
+                    var result = confirm("정말로 수정하시겠습니까?");
+                    if(result){
+                        $.ajax({
+                            type: "put",
+                            url: "/board/update",
+                            contentType: "application/json;charset=utf-8",
+                            datatype: "json",
+                            data: JSON.stringify({ "content": $('#content'+b_idx+' .inner .form-control').val(), "b_idx": b_idx }),
+                            success: function (data) {
+                                alert("수정되었습니다.");
+                                window.location.reload();
+                            },
+                            error: function (data) {
+                                alert(data);
+                            }
+                        });
+                    }
                 }
             });
         });
@@ -200,31 +201,34 @@
         <% for(int i=0;i<boardDtoList.size();i++){ %>
             <% int b_idx = boardDtoList.get(i).getB_idx(); %>
             <% String content = boardDtoList.get(i).getContent(); %>
-            <div id="review<%= b_idx %>">
-                <span id="content<%= b_idx %>">
-                    <span class="inner" style="width:900px"><%= content %></span>
-                </span>
-                <span id="button<%= b_idx %>">
-                <% if(session.getAttribute("m_idx") != null) { %>
-                    <% if(Integer.parseInt((String) session.getAttribute("m_idx"))==boardDtoList.get(i).getM_idx()) { %>
-                        <span class="btnDelete" style="float:right; padding:1px;">
-                            <button type="button" id="btnDelete<%= b_idx %>"
-                            class="btn btn-xs" value="<%= b_idx %>" style="border:1px solid #AAAAAA; background-color:white;">
-                            &#8569;
-                            </button>
+            <div id="review<%= b_idx %>" style="padding-left:10px; padding-right:10px">
+                <div id="content<%= b_idx %>" class="row">
+                    <div class="col-sm-2">id가 나올 곳</div>
+                    <div class="inner col-sm-8"><%= content %></div>
+                    <div class="col-sm-2">
+                        <span id="button<%= b_idx %>">
+                        <% if(session.getAttribute("m_idx") != null) { %>
+                            <% if(Integer.parseInt((String) session.getAttribute("m_idx"))==boardDtoList.get(i).getM_idx()) { %>
+                            <span class="btnDelete" style="float:right; padding:1px;">
+                                <button type="button" id="btnDelete<%= b_idx %>"
+                                class="btn btn-xs" value="<%= b_idx %>" style="border:1px solid #AAAAAA; background-color:white;">
+                                &#8569;
+                                </button>
+                            </span>
+                            <span class="btnUpdate" style="float:right; padding:1px;">
+                                <button type="button" id="btnUpdate<%= b_idx %>"
+                                class="btn btn-xs" value="<%= b_idx %>" style="border:1px solid #AAAAAA; background-color:white;">
+                      	        &#9998;
+                      	        </button>
+                      	    </span>
+                            <% } %>
+                        <% } %>
                         </span>
-                        <span class="btnUpdate" style="float:right; padding:1px;">
-                            <button type="button" id="btnUpdate<%= b_idx %>"
-                            class="btn btn-xs" value="<%= b_idx %>" style="border:1px solid #AAAAAA; background-color:white;">
-                      	    &#9998;
-                      	    </button>
-                      	</span>
-                    <% } %>
-                <% } %>
-                </span>
-                <div id="contentHR<%=b_idx%>">
-                    <hr style="border:none; border:1px dotted #EEEEEE">
+                    </div>
                 </div>
+            </div>
+            <div id="contentHR<%=b_idx%>">
+                <hr style="border:none; border:1px dotted #EEEEEE">
             </div>
          <% } %>
     </div>
