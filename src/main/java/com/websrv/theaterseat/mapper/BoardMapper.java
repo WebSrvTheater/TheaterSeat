@@ -15,6 +15,6 @@ public interface BoardMapper {
 
     public void updateBoard(BoardDto boardDto) throws Exception;
 
-    public String selectRatingAvg(String s_idx);
+    public double selectRatingAvg(String s_idx);
 
 }

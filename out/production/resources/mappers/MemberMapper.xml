@@ -17,6 +17,10 @@
         select * from member where userId=#{userId} and userPw=#{userPw};
     </select>
 
+    <select id="selectId" parameterType="int" resultType="String">
+        select userId from member where m_idx=#{m_idx}
+    </select>
+
     <insert id="insertMember" parameterType="com.websrv.theaterseat.dto.MemberDto">
         insert into member(userId,userPw) values(#{userId},#{userPw})
     </insert>

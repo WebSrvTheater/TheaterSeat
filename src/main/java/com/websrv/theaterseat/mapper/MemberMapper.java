@@ -10,4 +10,5 @@ public interface MemberMapper {
     public void deleteMember(String id);                         //회원 탈퇴
     public boolean findDuplicatedId(String userId);             //중복되는 Id 여부 리턴
     public List<MemberDto> loginCheck(MemberDto memberDto);             //해당하는 회원 여부 리턴
+    public String selectId(int m_idx);
 }

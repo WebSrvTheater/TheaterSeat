@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import ="java.util.*"%>
 <%@ page import ="com.websrv.theaterseat.dto.BoardDto"%>
+<%@ page import ="com.websrv.theaterseat.mapper.MemberMapper"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!-- jQuery -->
@@ -39,7 +40,8 @@
     String roomName = (String) request.getAttribute("roomName");
     char seatRow = (char) request.getAttribute("seatRow");
     int seatNum = (int) request.getAttribute("seatNum");
-    String ratingAvg = (String) request.getAttribute("ratingAvg");
+    double ratingAvg = (double) request.getAttribute("ratingAvg");
+    MemberMapper memberMapper = (MemberMapper) request.getAttribute("memberMapper");
 %>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
@@ -161,9 +163,39 @@
             <%=seatRow%>열
             <%=seatNum%>번
         </h2>
-        <h3 style="font-family: 'hanna', serif;">
-            별점 평점 : <%= ratingAvg %>
-        </h3>
+        <% if(ratingAvg <= 0.25) { %>
+            <img src="/resources/images/stars/0.png" style="width:10%; height:10%; padding-bottom:3px">
+        <% } %>
+        <% if(ratingAvg > 0.25 && ratingAvg <= 0.75) { %>
+            <img src="/resources/images/stars/5.png" style="width:10%; height:10%; padding-bottom:3px">
+        <% } %>
+        <% if(ratingAvg > 0.75 && ratingAvg <= 1.25){ %>
+            <img src="/resources/images/stars/10.png" style="width:10%; height:10%; padding-bottom:3px">
+        <% } %>
+        <% if(ratingAvg > 1.25 && ratingAvg <= 1.75){ %>
+            <img src="/resources/images/stars/15.png" style="width:10%; height:10%; padding-bottom:3px">
+        <% } %>
+        <% if(ratingAvg > 1.75 && ratingAvg <= 2.25){ %>
+            <img src="/resources/images/stars/20.png" style="width:10%; height:10%; padding-bottom:3px">
+        <% } %>
+        <% if(ratingAvg > 2.25 && ratingAvg <= 2.75){ %>
+            <img src="/resources/images/stars/25.png" style="width:10%; height:10%; padding-bottom:3px">
+        <% } %>
+        <% if(ratingAvg > 2.75 && ratingAvg <= 3.25){ %>
+            <img src="/resources/images/stars/30.png" style="width:10%; height:10%; padding-bottom:3px">
+        <% } %>
+        <% if(ratingAvg > 3.25 && ratingAvg <= 3.75){ %>
+            <img src="/resources/images/stars/35.png" style="width:10%; height:10%; padding-bottom:3px">
+        <% } %>
+        <% if(ratingAvg > 3.75 && ratingAvg <= 4.25){ %>
+            <img src="/resources/images/stars/40.png" style="width:10%; height:10%; padding-bottom:3px">
+        <% } %>
+        <% if(ratingAvg > 4.25 && ratingAvg <= 4.75){ %>
+            <img src="/resources/images/stars/45.png" style="width:10%; height:10%; padding-bottom:3px">
+        <% } %>
+        <% if(ratingAvg > 4.75){ %>
+            <img src="/resources/images/stars/50.png" style="width:10%; height:10%; padding-bottom:3px">
+        <% } %>
         </center>
     </div>
     <div id="seat-body">
@@ -205,11 +237,12 @@
         <% for(int i=0;i<boardDtoList.size();i++){ %>
             <% int b_idx = boardDtoList.get(i).getB_idx(); %>
             <% String content = boardDtoList.get(i).getContent(); %>
-            <% Double rating = boardDtoList.get(i).getRating(); %>
+            <% double rating = boardDtoList.get(i).getRating(); %>
+            <% String userId = memberMapper.selectId(boardDtoList.get(i).getM_idx()); %>
             <div id="review<%= b_idx %>" style="padding-left:10px; padding-right:10px">
                 <div id="content<%= b_idx %>" class="row">
-                    <div class="col-sm-2"><%= rating %></div>
-                    <div class="inner col-sm-8"><%= content %></div>
+                    <div class="col-sm-2" style="margin-top:10px"><%= userId %>님</div>
+                    <div class="inner col-sm-8"><img src="/resources/images/stars/<%= (int) (rating*10) %>.png" style="width:10%; height:10%; padding-bottom:3px"><br><%= content %></div>
                     <div class="col-sm-2">
                         <span id="button<%= b_idx %>">
                         <% if(session.getAttribute("m_idx") != null) { %>

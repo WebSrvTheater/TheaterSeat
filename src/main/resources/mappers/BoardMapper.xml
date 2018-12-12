@@ -13,7 +13,7 @@
         select * from member, board where member.m_idx=board.m_idx and board.s_idx=#{s_idx} order by b_idx desc
     </select>
 
-    <select id="selectRatingAvg" parameterType="String" resultType="String">
+    <select id="selectRatingAvg" parameterType="String" resultType="double">
             select round(avg(rating),2) from board where s_idx=#{s_idx} group by s_idx
     </select>
 

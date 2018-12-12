@@ -3,6 +3,7 @@ package com.websrv.theaterseat.controller;
 import com.websrv.theaterseat.dto.BoardDto;
 import com.websrv.theaterseat.dto.SeatDto;
 import com.websrv.theaterseat.mapper.BoardMapper;
+import com.websrv.theaterseat.mapper.MemberMapper;
 import com.websrv.theaterseat.mapper.RoomMapper;
 import com.websrv.theaterseat.mapper.TheaterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class IndexController {
 
     @Autowired
     BoardMapper boardMapper;
+
+    @Autowired
+    MemberMapper memberMapper;
 
     @RequestMapping("/")
     public String index(Model model) throws Exception {
@@ -107,6 +111,7 @@ public class IndexController {
         model.addAttribute("seatRow",roomMapper.selectSeat(s_idx).getSeatRow());
         model.addAttribute("seatNum",roomMapper.selectSeat(s_idx).getSeatNum());
         model.addAttribute("ratingAvg",boardMapper.selectRatingAvg(s_idx));
+        model.addAttribute("memberMapper",memberMapper);
         return "seat";
     }
 
