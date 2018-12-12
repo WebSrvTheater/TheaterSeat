@@ -32,4 +32,15 @@ public class BoardService {
             return new ResultView("200", "삭제되었습니다.");
         }catch(Exception e){e.printStackTrace();return new ResultView("500","Internal Server Error");}
     }
+
+    public ResultView updateContent(BoardDto boardDto){
+        try{
+            boardMapper.updateBoard(boardDto);
+            return new ResultView("200", "수정되었습니다.");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return new ResultView("500","Internal Server Error");
+        }
+    }
 }

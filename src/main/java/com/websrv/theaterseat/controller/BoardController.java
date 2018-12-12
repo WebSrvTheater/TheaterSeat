@@ -41,9 +41,9 @@ public class BoardController {
 
     @ResponseBody
     @PutMapping(value = "/update", produces = "application/json")
-    public ResultView deleteContent(@RequestBody BoardDto boardDto){
+    public ResultView updateContent(@RequestBody BoardDto boardDto){
         try{
-            return new ResultView("0","0");
+            return boardService.updateContent(boardDto);
         }catch(Exception e){
             throw e;
         }

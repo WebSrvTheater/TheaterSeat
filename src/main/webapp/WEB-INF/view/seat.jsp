@@ -122,8 +122,8 @@
             var click=0;
             $("button[id^='btnUpdate']").click(function(){
                 var b_idx = $(this).val();
+                var content = $('#content'+b_idx+' .inner').text();
                 if(click==0){
-                    var content = $('#content'+b_idx+' .inner').text();
                     $('#content'+b_idx+' .inner').replaceWith("<span class='inner'><textarea width='900px' style='margin-bottom:10px' class='form-control' maxlength='300'>"+content+"</textarea></span>");
                     $(this).append('수정');
                     $('#btnDelete'+b_idx).append('취소');
@@ -131,7 +131,20 @@
                     click++;
                 }
                 else{
-                    alert(b_idx);
+                    $.ajax({
+                        type: "put",
+                        url: "/board/update",
+                        contentType: "application/json;charset=utf-8",
+                        datatype: "json",
+                        data: JSON.stringify({ "content": $('#content'+b_idx+' .inner .form-control').val(), "b_idx": b_idx }),
+                        success: function (data) {
+                            alert("수정되었습니다.");
+                            window.location.reload();
+                        },
+                        error: function (data) {
+                            alert(data);
+                        }
+                   });
                 }
             });
         });

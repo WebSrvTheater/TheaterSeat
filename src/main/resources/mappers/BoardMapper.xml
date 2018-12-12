@@ -17,7 +17,7 @@
         select count(board.content) from member, board where member.m_idx=board.m_idx and board.m_idx=${m_idx} and board.s_idx=#{s_idx}
     </select>
 
-    <update id="updateBoardd" parameterType="String">
+    <update id="updateBoard" parameterType="com.websrv.theaterseat.dto.BoardDto">
         update board set content=#{content} where b_idx=#{b_idx}
     </update>
 

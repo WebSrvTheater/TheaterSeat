@@ -13,6 +13,6 @@ public interface BoardMapper {
 
     public void deleteBoard(String b_idx);
 
-    public void updateBoard(String b_idx);
+    public void updateBoard(BoardDto boardDto) throws Exception;
 
 }
