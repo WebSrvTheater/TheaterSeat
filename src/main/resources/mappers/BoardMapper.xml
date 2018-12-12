@@ -22,7 +22,7 @@
     </select>
 
     <update id="updateBoard" parameterType="com.websrv.theaterseat.dto.BoardDto">
-        update board set content=#{content} where b_idx=#{b_idx}
+        update board set content=#{content}, rating=#{rating} where b_idx=#{b_idx}
     </update>
 
     <delete id="deleteBoard" parameterType="String">

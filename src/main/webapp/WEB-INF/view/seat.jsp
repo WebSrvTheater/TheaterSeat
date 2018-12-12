@@ -48,6 +48,8 @@
     <script>
         $(document).ready(function () {
             var rating = 5;
+            var rateContent=0;
+            $("div[id^='star']").hide();
             $("#content").keyup(function () {
                 var content_length = $("#content").val().length;
                 if (content_length > 300)
@@ -109,7 +111,8 @@
                     }
                 }
                 else {
-                    $('#content'+b_idx+' .inner').replaceWith('<div class="inner col-sm-8">'+content+'</div>');
+                    $('#star'+b_idx).hide();
+                    $('#content'+b_idx+' .inner').replaceWith('<div class="inner"><img id="img'+b_idx+'" src="/resources/images/stars/'+rateContent+'.png" style="width:10%; height:10%; padding-bottom:3px" value="'+rateContent+'"><br>'+content+'</div>');
                     $(this).text('\u2169');
                     $('#btnUpdate'+b_idx).text('\u270E');
                     click--;
@@ -125,8 +128,10 @@
             $("button[id^='btnUpdate']").click(function(){
                 var b_idx = $(this).val();
                 var content = $('#content'+b_idx+' .inner').text();
+                rateContent = $('#img'+b_idx).attr('value');
                 if(click==0){
-                    $('#content'+b_idx+' .inner').replaceWith("<div class='inner col-sm-8'><textarea style='margin-bottom:10px' class='form-control' maxlength='300'>"+content+"</textarea></div>");
+                    $('#star'+b_idx).show();
+                    $('#content'+b_idx+' .inner').replaceWith('<div class="inner"><textarea style="margin-bottom:10px" class="form-control" maxlength="300">'+content+'</textarea></div>');
                     $(this).append('수정');
                     $('#btnDelete'+b_idx).append('취소');
                     click++;
@@ -139,7 +144,7 @@
                             url: "/board/update",
                             contentType: "application/json;charset=utf-8",
                             datatype: "json",
-                            data: JSON.stringify({ "content": $('#content'+b_idx+' .inner .form-control').val(), "b_idx": b_idx }),
+                            data: JSON.stringify({ "content": $('#content'+b_idx+' .inner .form-control').val(), "b_idx": b_idx, "rating": rating }),
                             success: function (data) {
                                 alert("수정되었습니다.");
                                 window.location.reload();
@@ -242,7 +247,22 @@
             <div id="review<%= b_idx %>" style="padding-left:10px; padding-right:10px">
                 <div id="content<%= b_idx %>" class="row">
                     <div class="col-sm-2" style="margin-top:10px"><%= userId %>님</div>
-                    <div class="inner col-sm-8"><img src="/resources/images/stars/<%= (int) (rating*10) %>.png" style="width:10%; height:10%; padding-bottom:3px"><br><%= content %></div>
+                    <div class="col-sm-8">
+                        <div id="star<%=b_idx%>">
+                            <span id=star class="starRev">
+                                <span class="starR1 on">0.5</span>
+                                <span class="starR2 on">1</span>
+                                <span class="starR1 on">1.5</span>
+                                <span class="starR2 on">2</span>
+                                <span class="starR1 on">2.5</span>
+                                <span class="starR2 on">3</span>
+                                <span class="starR1 on">3.5</span>
+                                <span class="starR2 on">4</span>
+                                <span class="starR1 on">4.5</span>
+                                <span class="starR2 on">5</span>
+                             </span>
+                        </div>
+                        <div class="inner"><img id="img<%= b_idx %>"src="/resources/images/stars/<%= (int) (rating*10) %>.png" style="width:10%; height:10%; padding-bottom:3px" value="<%=(int)(rating*10)%>"><br><%= content %></div></div>
                     <div class="col-sm-2">
                         <span id="button<%= b_idx %>">
                         <% if(session.getAttribute("m_idx") != null) { %>
