@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.websrv.theaterseat.mapper.TheaterMapper">
+
+    <select id="selectAllTheaterName" resultType="String">
+        select theaterName from theater
+    </select>
+
+    <select id="selectAllRoomName" resultType="String">
+        select roomName from room
+    </select>
+
+    <select id="selectRoomIdx" parameterType="String" resultType="String">
+        select r_idx from theater,room where theater.t_idx = room.t_idx and theater.t_idx=#{t_idx}
+    </select>
+
+</mapper>

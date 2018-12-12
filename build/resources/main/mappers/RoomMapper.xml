@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.websrv.theaterseat.mapper.RoomMapper">
+
+    <select id="selectAllSeats" parameterType="String" resultType="com.websrv.theaterseat.dto.SeatDto">
+        select s_idx, seatRow, seatNum, p_idx from seat where r_idx=#{r_idx}
+    </select>
+
+    <select id="selectMaxRow" parameterType="String" resultType="java.lang.Character">
+        select max(seatRow) from seat where r_idx=#{r_idx}
+    </select>
+
+    <select id="selectMaxNum" parameterType="String" resultType="int">
+        select max(seatNum) from seat where r_idx=#{r_idx}
+    </select>
+
+    <select id="isSeatExist" parameterType="map" resultType="boolean">
+        select count(*) from seat where seatRow=#{seatRow} and seatNum=#{seatNum} and r_idx=#{r_idx}
+    </select>
+
+    <select id="isHallWay" parameterType="map" resultType="boolean">
+        SELECT count(*) FROM room where find_in_set(#{seatNum}, hallway) and r_idx = #{r_idx}
+    </select>
+
+    <select id="selectTheaterName" parameterType="String" resultType="String">
+        select distinct theaterName from theater,room where theater.t_idx=(select t_idx from room where r_idx=#{r_idx})
+    </select>
+
+    <select id="selectRoomName" parameterType="String" resultType="String">
+        select distinct roomName from room where r_idx=#{r_idx}
+    </select>
+
+    <select id="selectRoomNameByS_Idx" parameterType="String" resultType="String">
+        select distinct roomName from room where r_idx=(select r_idx from seat where s_idx=#{s_idx})
+    </select>
+
+    <select id="selectSeat" parameterType="String" resultType="com.websrv.theaterseat.dto.SeatDto">
+        select * from seat where s_idx=#{s_idx}
+    </select>
+
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.websrv.theaterseat.mapper.BoardMapper">
+
+    <insert id="insertBoard" parameterType="com.websrv.theaterseat.dto.BoardDto">
+        insert into board(content, m_idx, s_idx, rating) values(#{content},#{m_idx},#{s_idx},#{rating})
+    </insert>
+
+    <select id="selectAllBoard" parameterType="String" resultType="com.websrv.theaterseat.dto.BoardDto">
+        select * from member, board where member.m_idx=board.m_idx and board.s_idx=#{s_idx} order by b_idx desc
+    </select>
+
+    <select id="selectRatingAvg" parameterType="String" resultType="double">
+            select round(avg(rating),2) from board where s_idx=#{s_idx} group by s_idx
+    </select>
+
+    <select id="isContentExist" parameterType="map" resultType="boolean">
+        select count(board.content) from member, board where member.m_idx=board.m_idx and board.m_idx=${m_idx} and board.s_idx=#{s_idx}
+    </select>
+
+    <update id="updateBoard" parameterType="com.websrv.theaterseat.dto.BoardDto">
+        update board set content=#{content}, rating=#{rating} where b_idx=#{b_idx}
+    </update>
+
+    <delete id="deleteBoard" parameterType="String">
+        delete from board where b_idx=#{b_idx}
+    </delete>
+
+</mapper>
