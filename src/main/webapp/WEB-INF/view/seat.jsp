@@ -40,7 +40,7 @@
     String roomName = (String) request.getAttribute("roomName");
     char seatRow = (char) request.getAttribute("seatRow");
     int seatNum = (int) request.getAttribute("seatNum");
-    double ratingAvg = (double) request.getAttribute("ratingAvg");
+    Double ratingAvg = (Double) request.getAttribute("ratingAvg");
     MemberMapper memberMapper = (MemberMapper) request.getAttribute("memberMapper");
 %>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -168,6 +168,9 @@
             <%=seatRow%>열
             <%=seatNum%>번
         </h2>
+        <% if(ratingAvg == null) { %>
+            <h4 style="font-family: 'hanna', serif;"> 아직 평가가 존재하지 않습니다. </h4>
+        <% } else { %>
         <% if(ratingAvg <= 0.25) { %>
             <img src="/resources/images/stars/0.png" style="width:10%; height:10%; padding-bottom:3px">
         <% } %>
@@ -200,6 +203,7 @@
         <% } %>
         <% if(ratingAvg > 4.75){ %>
             <img src="/resources/images/stars/50.png" style="width:10%; height:10%; padding-bottom:3px">
+        <% } %>
         <% } %>
         </center>
     </div>
