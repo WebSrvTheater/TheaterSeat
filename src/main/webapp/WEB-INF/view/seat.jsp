@@ -128,8 +128,8 @@
             $("button[id^='btnUpdate']").click(function(){
                 var b_idx = $(this).val();
                 var content = $('#content'+b_idx+' .inner').text();
-                rateContent = $('#img'+b_idx).attr('value');
                 if(click==0){
+                    rateContent = $('#img'+b_idx).attr('value');
                     $('#star'+b_idx).show();
                     $('#content'+b_idx+' .inner').replaceWith('<div class="inner"><textarea style="margin-bottom:10px" class="form-control" maxlength="300">'+content+'</textarea></div>');
                     $(this).append('수정');
