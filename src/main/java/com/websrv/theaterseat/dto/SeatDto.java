@@ -5,6 +5,7 @@ public class SeatDto {
     private char seatRow;
     private int seatNum;
     private int p_idx;
+    private boolean hasReview;
 
     public int getS_idx() {
         return s_idx;
@@ -33,4 +34,12 @@ public class SeatDto {
     public int getP_idx() { return p_idx; }
 
     public void setP_idx(int p_idx) { this.p_idx = p_idx; }
+
+    public boolean isHasReview() {
+        return hasReview;
+    }
+
+    public void setHasReview(boolean hasReview) {
+        this.hasReview = hasReview;
+    }
 }
