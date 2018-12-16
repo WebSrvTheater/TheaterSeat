@@ -98,7 +98,10 @@
                  }
              %>
                     <button <%-- IndexController에 seat 매핑된 부분으로 s_idx 전달 --%>
-                        style="display:block; line-height:22px; width:100%; vertical-align:middle; text-align:center; border-radius: 0px; background-color:<%if(colorNum>3){ out.print(color);%>;<%}else{%>#888888;<%}%> border:3px solid<%= color %>;"
+                        style="display:block; line-height:22px; width:100%; vertical-align:middle; text-align:center; border-radius: 0px;
+                                background-color:<%if(colorNum>3){ out.print(color);%>;<%}else{%>#888888;<%}%>
+                                opacity:<%if(seatDto.get(index).isHasReview()){ out.print(1);%>;<%}else{%>0.4;<%}%>
+                                border:3px solid<%= color %>;"
                         class="btn btn-xs" onclick="PopupCenterDual('/seat/<%=seatDto.get(index).getS_idx()%>','popup','1000','700');">
                         <%-- index에 해당하는 모달창과 연결 --%>
                         <span style="font-size:12px; color: white;">

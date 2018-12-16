@@ -6,7 +6,7 @@
 <mapper namespace="com.websrv.theaterseat.mapper.RoomMapper">
 
     <select id="selectAllSeats" parameterType="String" resultType="com.websrv.theaterseat.dto.SeatDto">
-        select s_idx, seatRow, seatNum, p_idx from seat where r_idx=#{r_idx}
+        select s_idx, seatRow, seatNum, p_idx, if((select count(b_idx) from board where board.s_idx = seat.s_idx) = 0, false, true ) as hasReview from seat where r_idx=#{r_idx};
     </select>
 
     <select id="selectMaxRow" parameterType="String" resultType="java.lang.Character">
